@@ -38,8 +38,8 @@
   <div class="navlinks">
     <a href="#story">Our Story</a>
     <a href="#dress-code">Dress Code</a>
-    <a href="#venue">Venue</a>
     <a href="#rsvp">RSVP</a>
+    <a href="#venue">Venue</a>
     <a href="#qa" class="hide-xs">Q&amp;A</a>
     <a href="photos.html">Photos</a>
   </div>
@@ -158,6 +158,56 @@
   </div>
 </section>
 
+
+
+<section id="rsvp">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Kindly Reply By October 01, 2026</div>
+      <h2>RSVP</h2>
+      <p>We can't wait to celebrate with you. Please let us know if you'll be joining us — and don't forget to mention any dietary requirements.</p>
+    </div>
+
+    <form id="rsvp-form" class="reveal-scale">
+      <input type="hidden" name="_subject" value="New Wedding RSVP Submission">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your email" required>
+      </div>
+
+      <div class="field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+
+      <div class="field">
+        <label>Will you be attending?</label>
+        <div class="radio-row">
+          <label class="radio-pill" id="pill-yes">
+            <input type="radio" name="attending" value="Joyfully accepts" required> Joyfully accepts
+          </label>
+          <label class="radio-pill" id="pill-no">
+            <input type="radio" name="attending" value="Regretfully declines" required> Regretfully declines
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="guests">Number of guests (including you)</label>
+        <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
+      </div>
+
+      <div class="field">
+        <label for="message">Message or well-wishes</label>
+        <textarea id="message" name="message" placeholder="Leave a note for Simon & Emma (optional)"></textarea>
+      </div>
+
+      <button type="submit" id="rsvp-submit">Send RSVP</button>
+      <div id="rsvp-msg" class="rsvp-msg" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
 <section id="venue">
   <div class="wrap">
     <div class="section-head reveal">
@@ -222,54 +272,6 @@
         <p style="font-size:.78rem; opacity:.7; margin-top:12px;">Parking is available on-site. Shuttles run from Makati at 1:00 PM — RSVP to reserve a seat.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<section id="rsvp">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">Kindly Reply By October 01, 2026</div>
-      <h2>RSVP</h2>
-      <p>We can't wait to celebrate with you. Please let us know if you'll be joining us — and don't forget to mention any dietary requirements.</p>
-    </div>
-
-    <form id="rsvp-form" class="reveal-scale">
-      <input type="hidden" name="_subject" value="New Wedding RSVP Submission">
-      <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Your email" required>
-      </div>
-
-      <div class="field">
-        <label for="name">Full name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required>
-      </div>
-
-      <div class="field">
-        <label>Will you be attending?</label>
-        <div class="radio-row">
-          <label class="radio-pill" id="pill-yes">
-            <input type="radio" name="attending" value="Joyfully accepts" required> Joyfully accepts
-          </label>
-          <label class="radio-pill" id="pill-no">
-            <input type="radio" name="attending" value="Regretfully declines" required> Regretfully declines
-          </label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="guests">Number of guests (including you)</label>
-        <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
-      </div>
-
-      <div class="field">
-        <label for="message">Message or well-wishes</label>
-        <textarea id="message" name="message" placeholder="Leave a note for Simon & Emma (optional)"></textarea>
-      </div>
-
-      <button type="submit" id="rsvp-submit">Send RSVP</button>
-      <div id="rsvp-msg" class="rsvp-msg" role="status" aria-live="polite"></div>
-    </form>
   </div>
 </section>
 
