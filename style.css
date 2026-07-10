@@ -369,6 +369,32 @@
   #rsvp-msg.ok{ color:var(--autumn-deep); }
   #rsvp-msg.err{ color:#a1473f; }
 
+
+  .rsvp-msg {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    display: none;
+  }
+  
+  .rsvp-msg.show {
+    display: block;
+  }
+  
+  .rsvp-msg.ok {
+    background: rgba(79, 111, 82, 0.10);
+    color: #35523A;
+    border: 1px solid rgba(79, 111, 82, 0.20);
+  }
+  
+  .rsvp-msg.err {
+    background: rgba(139, 58, 58, 0.10);
+    color: #7A2F2F;
+    border: 1px solid rgba(139, 58, 58, 0.20);
+  }
+  
   /* ---------- Q&A ---------- */
   #qa{ background:var(--autumn-cream); }
   .faq-list{ max-width:720px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }

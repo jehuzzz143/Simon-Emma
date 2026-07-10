@@ -233,7 +233,7 @@
       <p>We can't wait to celebrate with you. Please let us know if you'll be joining us — and don't forget to mention any dietary requirements.</p>
     </div>
 
-    <form id="rsvp-form" action="https://formspree.io/f/mdarqaqd" method="POST" class="reveal-scale">
+    <form id="rsvp-form" class="reveal-scale">
       <input type="hidden" name="_subject" value="New Wedding RSVP Submission">
       <div class="field">
         <label for="email">Email</label>
@@ -268,7 +268,7 @@
       </div>
 
       <button type="submit" id="rsvp-submit">Send RSVP</button>
-      <div id="rsvp-msg" role="status"></div>
+      <div id="rsvp-msg" class="rsvp-msg" role="status" aria-live="polite"></div>
     </form>
   </div>
 </section>
@@ -378,7 +378,15 @@
   <p>OCTOBER 17, 2026 &nbsp;·&nbsp; WITH LOVE AND GRATITUDE</p>
 </footer>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // ---------- supabase connection ----------
+  const SUPABASE_URL = 'https://rxqmvguyntontpgxupeh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cW12Z3V5bnRvbnRwZ3h1cGVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTEyMjAsImV4cCI6MjA5OTIyNzIyMH0.4bil8xGsGpMfOygS3JvGdLeP3_M99FCmOTKGgKsHX3s';
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // --------------
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- nav solid + active section ----------
@@ -527,6 +535,7 @@
 let toastTimer;
 
 function showToast(message, type = 'success') {
+  
   if (!toast) return;
 
   toast.textContent = message;
@@ -545,43 +554,86 @@ function showToast(message, type = 'success') {
     toast.classList.remove('show');
   }, 4000);
 }
+const msg = document.getElementById('rsvp-msg');
+
+function showInlineMessage(message, type = 'ok') {
+  if (!msg) return;
+  msg.textContent = message;
+  msg.className = `rsvp-msg ${type} show`;
+}
+
+function clearInlineMessage() {
+  if (!msg) return;
+  msg.textContent = '';
+  msg.className = 'rsvp-msg';
+}
   // ---------- RSVP submit ----------
   const form = document.getElementById('rsvp-form');
-  const msg = document.getElementById('rsvp-msg');
-  const submitBtn = document.getElementById('rsvp-submit');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    msg.textContent = ''; msg.className = '';
-    if(form.action.includes('YOUR_FORM_ID')){
-      msg.textContent = 'Almost there — connect a Formspree form ID to enable submissions.';
-      showToast('Almost there — connect your Formspree form ID first.', 'error');
-      return;
-    }
-    submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
-    try{
-      const res = await fetch(form.action, {
-        method: 'POST', body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if(res.ok){
-      msg.textContent = 'Thank you! We’ve received your RSVP and can’t wait to celebrate with you.';
-      msg.className = 'ok';
-      form.reset();
-      document.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('active'));
-      showToast('Thank you! We’ve received your RSVP and can’t wait to celebrate with you.', 'success');
-    } else {
-        msg.textContent = 'Something went wrong. Please try again.';
-        msg.className = 'err';
-        showToast('Something went wrong. Please try again.', 'error');
+const submitBtn = document.getElementById('rsvp-submit');
+
+
+function showInlineMessage(message, type = 'ok') {
+  if (!msg) return;
+  msg.textContent = message;
+  msg.className = `rsvp-msg ${type} show`;
+}
+
+function clearInlineMessage() {
+  if (!msg) return;
+  msg.textContent = '';
+  msg.className = 'rsvp-msg';
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  clearInlineMessage();
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  try {
+    const formData = new FormData(form);
+
+    const payload = {
+      email: (formData.get('email') || '').toString().trim().toLowerCase(),
+      name: (formData.get('name') || '').toString().trim(),
+      attending: (formData.get('attending') || '').toString().trim(),
+      guests: Number(formData.get('guests') || 1),
+      message: (formData.get('message') || '').toString().trim() || null
+    };
+
+    const { error } = await supabaseClient
+      .from('rsvps')
+      .insert([payload]);
+
+    if (error) {
+      if (error.code === '23505') {
+        const duplicateMsg = 'This email has already been used for an RSVP. If you need to make changes, please contact the couple.';
+        showToast(duplicateMsg, 'error');
+        showInlineMessage(duplicateMsg, 'err');
+        return;
       }
-    } catch(err){
-      msg.textContent = 'Network error — please check your connection.';
-      msg.className = 'err';
-      showToast('Network error — please check your connection.', 'error');
-    } finally {
-      submitBtn.disabled = false; submitBtn.textContent = 'Send RSVP';
+
+      throw error;
     }
-  });
+
+    const successMsg = "Thank you! We've received your RSVP and can't wait to celebrate with you.";
+    showToast(successMsg);
+    showInlineMessage(successMsg, 'ok');
+
+    form.reset();
+    document.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('active'));
+
+  } catch (err) {
+    console.error('RSVP insert failed:', err);
+    const errorMsg = 'Sorry, something went wrong while sending your RSVP. Please try again.';
+    showToast(errorMsg, 'error');
+    showInlineMessage(errorMsg, 'err');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send RSVP';
+  }
+});
 </script>
 
 </body>
