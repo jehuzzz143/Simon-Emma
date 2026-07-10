@@ -233,9 +233,10 @@
       <p>We can't wait to celebrate with you. Please let us know if you'll be joining us — and don't forget to mention any dietary requirements.</p>
     </div>
 
-    <form id="rsvp-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="reveal-scale">
+    <form id="rsvp-form" action="https://formspree.io/f/mdarqaqd" method="POST" class="reveal-scale">
+      <input type="hidden" name="_subject" value="New Wedding RSVP Submission">
       <div class="field">
-        <label for="name">Email</label>
+        <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Your email" required>
       </div>
 
@@ -376,7 +377,7 @@
   <div class="display">Emma &amp; Simon</div>
   <p>OCTOBER 17, 2026 &nbsp;·&nbsp; WITH LOVE AND GRATITUDE</p>
 </footer>
-
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -521,7 +522,29 @@
       pill.classList.add('active');
     });
   });
+  // ---------- toast ----------
+  const toast = document.getElementById('toast');
+let toastTimer;
 
+function showToast(message, type = 'success') {
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.className = 'toast';
+
+  if (type === 'error') {
+    toast.classList.add('error');
+  }
+
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4000);
+}
   // ---------- RSVP submit ----------
   const form = document.getElementById('rsvp-form');
   const msg = document.getElementById('rsvp-msg');
@@ -531,7 +554,7 @@
     msg.textContent = ''; msg.className = '';
     if(form.action.includes('YOUR_FORM_ID')){
       msg.textContent = 'Almost there — connect a Formspree form ID to enable submissions.';
-      msg.className = 'err';
+      showToast('Almost there — connect your Formspree form ID first.', 'error');
       return;
     }
     submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
@@ -541,17 +564,20 @@
         headers: { 'Accept': 'application/json' }
       });
       if(res.ok){
-        msg.textContent = 'Thank you! Your RSVP has been received.';
-        msg.className = 'ok';
-        form.reset();
-        document.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('active'));
-      } else {
+      msg.textContent = 'Thank you! We’ve received your RSVP and can’t wait to celebrate with you.';
+      msg.className = 'ok';
+      form.reset();
+      document.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('active'));
+      showToast('Thank you! We’ve received your RSVP and can’t wait to celebrate with you.', 'success');
+    } else {
         msg.textContent = 'Something went wrong. Please try again.';
         msg.className = 'err';
+        showToast('Something went wrong. Please try again.', 'error');
       }
     } catch(err){
       msg.textContent = 'Network error — please check your connection.';
       msg.className = 'err';
+      showToast('Network error — please check your connection.', 'error');
     } finally {
       submitBtn.disabled = false; submitBtn.textContent = 'Send RSVP';
     }
