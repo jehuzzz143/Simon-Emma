@@ -273,6 +273,8 @@
   </div>
 </section>
 
+
+
 <section id="qa">
   <div class="wrap">
     <div class="section-head reveal">
@@ -324,6 +326,20 @@
         </button>
         <div class="faq-a"><p>Yes — the ceremony is in the garden pavilion. A covered backup plan is ready in case of rain. We recommend bringing a light wrap for the evening breeze.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="guest-messages">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">From Our Guests</div>
+      <h2>Sweet Messages</h2>
+      <p>Little notes and well-wishes from the people we love.</p>
+    </div>
+
+    <div class="guest-marquee reveal">
+      <div class="guest-marquee-track" id="guest-marquee-track"></div>
     </div>
   </div>
 </section>
@@ -633,6 +649,214 @@ form.addEventListener('submit', async (e) => {
     submitBtn.disabled = false;
     submitBtn.textContent = 'Send RSVP';
   }
+});
+
+// =========================================================
+// GUEST MESSAGE CAROUSEL
+// =========================================================
+
+const guestTrack = document.getElementById('guest-marquee-track');
+const guestMarquee = guestTrack?.parentElement;
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function getInitials(name = '') {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map(part => part[0]?.toUpperCase() || '')
+    .join('') || 'G';
+}
+
+function escapeHtml(str = '') {
+  return str
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function buildGuestCard(item) {
+  const name = escapeHtml(item.name || 'Guest');
+  const message = escapeHtml(item.message || '');
+  const initials = getInitials(item.name || 'Guest');
+
+  return `
+    <article class="guest-card">
+      <p class="guest-card-message">${message}</p>
+      <div class="guest-card-footer">
+        <div class="guest-card-avatar">${initials}</div>
+        <div>
+          <div class="guest-card-name">${name}</div>
+          <div class="guest-card-sub">With love</div>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+let marqueeState = {
+  isDragging: false,
+  startX: 0,
+  currentTranslate: 0,
+  prevTranslate: 0,
+  animationId: null,
+  autoSpeed: 0.45, // px per frame; adjust if you want faster/slower
+  loopWidth: 0
+};
+
+function stopGuestMarquee() {
+  if (marqueeState.animationId) {
+    cancelAnimationFrame(marqueeState.animationId);
+    marqueeState.animationId = null;
+  }
+}
+
+function setGuestTrackPosition(x) {
+  guestTrack.style.transform = `translate3d(${x}px, 0, 0)`;
+}
+
+function normalizeGuestTrackPosition() {
+  const { loopWidth } = marqueeState;
+  if (!loopWidth) return;
+
+  // keep translate between -loopWidth and 0 for seamless looping
+  if (marqueeState.currentTranslate <= -loopWidth) {
+    marqueeState.currentTranslate += loopWidth;
+  } else if (marqueeState.currentTranslate > 0) {
+    marqueeState.currentTranslate -= loopWidth;
+  }
+}
+
+function animateGuestMarquee() {
+  if (!marqueeState.isDragging) {
+    marqueeState.currentTranslate -= marqueeState.autoSpeed;
+    normalizeGuestTrackPosition();
+    setGuestTrackPosition(marqueeState.currentTranslate);
+  }
+
+  marqueeState.animationId = requestAnimationFrame(animateGuestMarquee);
+}
+
+function setupGuestMarqueeDrag() {
+  if (!guestMarquee || !guestTrack) return;
+
+  const getClientX = (e) => {
+    if (e.touches?.length) return e.touches[0].clientX;
+    if (e.changedTouches?.length) return e.changedTouches[0].clientX;
+    return e.clientX;
+  };
+
+  const onDragStart = (e) => {
+    marqueeState.isDragging = true;
+    guestMarquee.classList.add('dragging');
+    marqueeState.startX = getClientX(e);
+    marqueeState.prevTranslate = marqueeState.currentTranslate;
+  };
+
+  const onDragMove = (e) => {
+    if (!marqueeState.isDragging) return;
+    const currentX = getClientX(e);
+    const delta = currentX - marqueeState.startX;
+    marqueeState.currentTranslate = marqueeState.prevTranslate + delta;
+    normalizeGuestTrackPosition();
+    setGuestTrackPosition(marqueeState.currentTranslate);
+  };
+
+  const onDragEnd = () => {
+    if (!marqueeState.isDragging) return;
+    marqueeState.isDragging = false;
+    guestMarquee.classList.remove('dragging');
+    marqueeState.prevTranslate = marqueeState.currentTranslate;
+  };
+
+  guestMarquee.addEventListener('mousedown', onDragStart);
+  window.addEventListener('mousemove', onDragMove);
+  window.addEventListener('mouseup', onDragEnd);
+
+  guestMarquee.addEventListener('touchstart', onDragStart, { passive: true });
+  window.addEventListener('touchmove', onDragMove, { passive: true });
+  window.addEventListener('touchend', onDragEnd);
+
+  guestMarquee.addEventListener('mouseleave', onDragEnd);
+}
+
+async function loadGuestMessages() {
+  if (!guestTrack) return;
+
+  guestTrack.innerHTML = '';
+
+  const { data, error } = await supabaseClient
+    .from('rsvps')
+    .select('name, message')
+    .eq('is_approved', true)
+    .eq('show_message', true)
+    .not('message', 'is', null);
+
+  if (error) {
+    console.error('Failed to load guest messages:', error);
+    guestTrack.innerHTML = `<div class="guest-marquee-empty">Guest messages will appear here soon.</div>`;
+    return;
+  }
+
+  const cleaned = (data || [])
+    .map(item => ({
+      name: (item.name || '').trim(),
+      message: (item.message || '').trim()
+    }))
+    .filter(item => item.message.length > 0);
+
+  if (!cleaned.length) {
+    guestTrack.innerHTML = `<div class="guest-marquee-empty">Guest messages will appear here soon.</div>`;
+    return;
+  }
+
+  // randomize every visit
+  const shuffled = shuffleArray(cleaned);
+
+  // duplicate once for seamless looping
+  const html = [...shuffled, ...shuffled]
+    .map(buildGuestCard)
+    .join('');
+
+  guestTrack.innerHTML = html;
+
+  // wait for layout
+  requestAnimationFrame(() => {
+    const cards = guestTrack.querySelectorAll('.guest-card');
+    if (!cards.length) return;
+
+    // first half width = loop width
+    const totalWidth = guestTrack.scrollWidth;
+    marqueeState.loopWidth = totalWidth / 2;
+    marqueeState.currentTranslate = 0;
+    marqueeState.prevTranslate = 0;
+
+    setGuestTrackPosition(0);
+    stopGuestMarquee();
+    animateGuestMarquee();
+  });
+}
+
+setupGuestMarqueeDrag();
+loadGuestMessages();
+window.addEventListener('resize', () => {
+  // recompute width on resize
+  if (!guestTrack || !guestTrack.children.length) return;
+  requestAnimationFrame(() => {
+    marqueeState.loopWidth = guestTrack.scrollWidth / 2;
+    normalizeGuestTrackPosition();
+    setGuestTrackPosition(marqueeState.currentTranslate);
+  });
 });
 </script>
 

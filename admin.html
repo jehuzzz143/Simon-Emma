@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP Admin</title>
+  <style>
+    :root{
+      --bg:#f7f4ee;
+      --card:#fff;
+      --line:#e7e1d7;
+      --text:#243127;
+      --muted:#6d776e;
+      --sage:#4F6F52;
+      --sage-soft:#e9efe9;
+      --ok:#35523A;
+      --ok-bg:#edf5ee;
+      --hide:#6f644d;
+      --hide-bg:#f3efe8;
+      --err:#8b3a3a;
+      --err-bg:#f7ecec;
+      --shadow:0 12px 30px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px 16px 40px;
+    }
+
+    h1{margin:0 0 8px}
+    .sub{color:var(--muted);margin:0 0 24px}
+
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .btn{
+      border:0;
+      background:var(--sage);
+      color:#fff;
+      padding:11px 16px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      transition:.18s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.secondary{background:var(--sage-soft);color:var(--sage)}
+    .btn.small{padding:8px 12px;font-size:.9rem}
+    .btn.hide{background:var(--hide-bg);color:var(--hide)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .stat{padding:18px}
+    .stat-label{font-size:.9rem;color:var(--muted);margin-bottom:8px}
+    .stat-value{font-size:2rem;font-weight:700}
+
+    .status{
+      display:none;
+      margin-bottom:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      line-height:1.45;
+    }
+    .status.show{display:block}
+    .status.ok{background:var(--ok-bg);color:var(--ok)}
+    .status.err{background:var(--err-bg);color:var(--err)}
+
+    .panel{padding:16px}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:1080px}
+    th,td{
+      padding:12px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+    }
+    th{
+      font-size:.9rem;
+      color:var(--muted);
+      background:#faf8f3;
+    }
+
+    .muted{color:var(--muted)}
+    .message{
+      max-width:340px;
+      white-space:pre-wrap;
+      line-height:1.45;
+    }
+    .empty{
+      text-align:center;
+      color:var(--muted);
+      padding:26px;
+    }
+
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:600;
+      white-space:nowrap;
+    }
+    .status-pill.visible{
+      background:var(--ok-bg);
+      color:var(--ok);
+    }
+    .status-pill.hidden{
+      background:var(--hide-bg);
+      color:var(--hide);
+    }
+
+    .action-stack{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:999;
+    }
+    .modal-backdrop.open{display:flex}
+
+    .modal{
+      width:min(640px,100%);
+      background:#fff;
+      border-radius:20px;
+      padding:20px;
+      border:1px solid var(--line);
+      box-shadow:0 24px 60px rgba(0,0,0,.18);
+    }
+
+    .modal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+      gap:10px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+    .field.full{grid-column:1/-1}
+
+    label{
+      font-size:.92rem;
+      font-weight:600;
+    }
+
+    input,select,textarea{
+      width:100%;
+      padding:11px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      font:inherit;
+      background:#fff;
+    }
+
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    @media (max-width:800px){
+      .stats,.form-grid{grid-template-columns:1fr}
+      table{min-width:820px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>RSVP Admin</h1>
+        <p class="sub">Simple dashboard for guest RSVPs and message display control.</p>
+      </div>
+      <button class="btn" id="open-create-btn">Add guest / mock message</button>
+    </div>
+
+    <div id="page-status" class="status" role="status" aria-live="polite"></div>
+
+    <div class="stats">
+      <div class="card stat">
+        <div class="stat-label">Total RSVP count</div>
+        <div class="stat-value" id="stat-rsvp-count">0</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-label">Total number of guests</div>
+        <div class="stat-value" id="stat-total-guests">0</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-label">Approved messages</div>
+        <div class="stat-value" id="stat-approved-messages">0</div>
+      </div>
+    </div>
+
+    <div class="card panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Attendance</th>
+              <th>Guests</th>
+              <th>Message</th>
+              <th>Website status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rsvp-table-body">
+            <tr><td colspan="7" class="empty">Loading RSVP records…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="create-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <strong>Add guest / mock message</strong>
+        <button class="btn secondary small" type="button" id="close-create-btn">Close</button>
+      </div>
+
+      <form id="create-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="create-name">Name</label>
+            <input id="create-name" name="name" type="text">
+          </div>
+          <div class="field">
+            <label for="create-email">Email</label>
+            <input id="create-email" name="email" type="email">
+          </div>
+          <div class="field">
+            <label for="create-attending">Attendance</label>
+            <select id="create-attending" name="attending">
+              <option value="Joyfully accepts">Joyfully accepts</option>
+              <option value="Regretfully declines">Regretfully declines</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="create-guests">Guests</label>
+            <input id="create-guests" name="guests" type="number" min="0" value="0">
+          </div>
+          <div class="field full">
+            <label for="create-message">Message</label>
+            <textarea id="create-message" name="message" placeholder="Optional message"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn secondary" id="cancel-create-btn">Cancel</button>
+          <button type="submit" class="btn" id="submit-create-btn">Save RSVP</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+      const SUPABASE_URL = 'https://rxqmvguyntontpgxupeh.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cW12Z3V5bnRvbnRwZ3h1cGVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTEyMjAsImV4cCI6MjA5OTIyNzIyMH0.4bil8xGsGpMfOygS3JvGdLeP3_M99FCmOTKGgKsHX3s';
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const els = {
+      tbody: document.getElementById('rsvp-table-body'),
+      status: document.getElementById('page-status'),
+      statRsvp: document.getElementById('stat-rsvp-count'),
+      statGuests: document.getElementById('stat-total-guests'),
+      statApproved: document.getElementById('stat-approved-messages'),
+      modal: document.getElementById('create-modal'),
+      openBtn: document.getElementById('open-create-btn'),
+      closeBtn: document.getElementById('close-create-btn'),
+      cancelBtn: document.getElementById('cancel-create-btn'),
+      createForm: document.getElementById('create-form'),
+      submitBtn: document.getElementById('submit-create-btn')
+    };
+
+    function showStatus(message, type = 'ok') {
+      els.status.textContent = message;
+      els.status.className = `status ${type} show`;
+    }
+
+    function escapeHtml(str = '') {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function openModal() {
+      els.modal.classList.add('open');
+    }
+
+    function closeModal() {
+      els.modal.classList.remove('open');
+      els.createForm.reset();
+      document.getElementById('create-guests').value = 0;
+    }
+
+    function updateStats(rows) {
+      els.statRsvp.textContent = rows.length;
+      els.statGuests.textContent = rows
+        .filter(r => r.attending === 'Joyfully accepts')
+        .reduce((sum, r) => sum + (Number(r.guests) || 0), 0);
+
+      els.statApproved.textContent = rows.filter(r => {
+        const msg = (r.message || '').trim();
+        return msg && r.is_approved && r.show_message;
+      }).length;
+    }
+
+    function getWebsiteStatus(row) {
+      return row.show_message ? 'visible' : 'hidden';
+    }
+
+    function renderRows(rows) {
+      if (!rows.length) {
+        els.tbody.innerHTML = '<tr><td colspan="7" class="empty">No RSVP records yet.</td></tr>';
+        return;
+      }
+
+      els.tbody.innerHTML = rows.map(row => {
+        const msg = (row.message || '').trim();
+        const status = getWebsiteStatus(row);
+        return `
+          <tr>
+            <td>${escapeHtml(row.name || '')}</td>
+            <td>${escapeHtml(row.email || '')}</td>
+            <td>${escapeHtml(row.attending || '')}</td>
+            <td>${row.guests ?? 0}</td>
+            <td class="message">${msg ? escapeHtml(msg) : '<span class="muted">No message</span>'}</td>
+            <td>
+              <span class="status-pill ${status}">
+                ${status === 'visible' ? 'Currently visible' : 'Hidden'}
+              </span>
+            </td>
+            <td>
+              <div class="action-stack">
+                <button
+                  class="btn secondary small js-show"
+                  data-id="${row.id}"
+                  ${row.show_message ? 'disabled' : ''}>
+                  Show
+                </button>
+                <button
+                  class="btn hide small js-hide"
+                  data-id="${row.id}"
+                  ${!row.show_message ? 'disabled' : ''}>
+                  Hide
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function loadRsvps() {
+      const { data, error } = await supabaseClient
+        .from('rsvps')
+        .select('id, name, email, attending, guests, message, is_approved, show_message')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error(error);
+        showStatus('Failed to load RSVP records. Check your Supabase config or policies.', 'err');
+        els.tbody.innerHTML = '<tr><td colspan="7" class="empty">Could not load RSVP records.</td></tr>';
+        return;
+      }
+
+      const rows = data || [];
+      updateStats(rows);
+      renderRows(rows);
+    }
+
+    async function setMessageVisibility(id, shouldShow) {
+      const { error } = await supabaseClient
+        .from('rsvps')
+        .update({
+          show_message: shouldShow,
+          is_approved: shouldShow
+        })
+        .eq('id', id);
+
+      if (error) {
+        console.error(error);
+        showStatus('Could not update the RSVP row.', 'err');
+        return;
+      }
+
+      showStatus(
+        shouldShow ? 'Message is now visible on the website.' : 'Message hidden from the website.',
+        'ok'
+      );
+      await loadRsvps();
+    }
+
+    async function handleCreateSubmit(e) {
+      e.preventDefault();
+
+      const payload = {
+        name: document.getElementById('create-name').value.trim() || null,
+        email: document.getElementById('create-email').value.trim().toLowerCase() || null,
+        attending: document.getElementById('create-attending').value || 'Joyfully accepts',
+        guests: Number(document.getElementById('create-guests').value || 0),
+        message: document.getElementById('create-message').value.trim() || null,
+        is_approved: false,
+        show_message: false
+      };
+
+      els.submitBtn.disabled = true;
+      els.submitBtn.textContent = 'Saving…';
+
+      try {
+        const { error } = await supabaseClient.from('rsvps').insert([payload]);
+        if (error) throw error;
+
+        showStatus('RSVP record added.', 'ok');
+        closeModal();
+        await loadRsvps();
+      } catch (error) {
+        console.error(error);
+        showStatus('Could not save RSVP record. Check your table columns / insert policy.', 'err');
+      } finally {
+        els.submitBtn.disabled = false;
+        els.submitBtn.textContent = 'Save RSVP';
+      }
+    }
+
+    els.openBtn.addEventListener('click', openModal);
+    els.closeBtn.addEventListener('click', closeModal);
+    els.cancelBtn.addEventListener('click', closeModal);
+    els.modal.addEventListener('click', (e) => {
+      if (e.target === els.modal) closeModal();
+    });
+
+    els.createForm.addEventListener('submit', handleCreateSubmit);
+
+    els.tbody.addEventListener('click', async (e) => {
+      const showBtn = e.target.closest('.js-show');
+      if (showBtn && !showBtn.disabled) {
+        await setMessageVisibility(showBtn.dataset.id, true);
+        return;
+      }
+
+      const hideBtn = e.target.closest('.js-hide');
+      if (hideBtn && !hideBtn.disabled) {
+        await setMessageVisibility(hideBtn.dataset.id, false);
+      }
+    });
+
+    loadRsvps();
+  </script>
+</body>
+</html>
