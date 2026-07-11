@@ -13,7 +13,7 @@ No JavaScript yet.
    PART 3
    BACKGROUND EFFECTS
 ========================================================== */
-
+var isInvitationClicked = false;
 const particles = document.getElementById("particles");
 const leaves = document.getElementById("leaves");
 
@@ -118,7 +118,7 @@ seal.addEventListener("click", () => {
         // Tiny delay guarantees the browser renders the website before animating the scroll
         setTimeout(() => {
             const heroElement = document.getElementById("hero");
-            if (heroElement) {
+            if (heroElement && isInvitationClicked == false) {
                 heroElement.scrollIntoView({ 
                     behavior: "smooth", 
                     block: "start" 
@@ -162,6 +162,7 @@ function startMusic(){
 
 }
 openButton.addEventListener("click",()=>{
+    this.isInvitationClicked = true;
     clearInterval(leafInterval);
     intro.classList.add("hide");
 
