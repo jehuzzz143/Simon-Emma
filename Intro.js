@@ -28,9 +28,8 @@ for(let i=0;i<particleCount;i++){
     const dot=document.createElement("span");
 
     dot.className="particle";
-
-    dot.style.top = Math.random() * window.innerHeight + "px";
-dot.style.left = Math.random() * window.innerWidth + "px";
+dot.style.top = Math.random() * 100 + "vh";
+dot.style.left = Math.random() * 100 + "vw";
 
     dot.style.animationDuration=
         (6+Math.random()*6)+"s";
@@ -45,11 +44,11 @@ dot.style.left = Math.random() * window.innerWidth + "px";
 /* -----------------------------
    Falling Leaves
 ------------------------------ */
-
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
 function createLeaf(){
-
     const leaf=document.createElement("img");
-    const isMobile = window.innerWidth <= 768;
+    //const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    //const isMobile = window.innerWidth <= 768;
     leaf.src="src/leaf.svg";
 
     leaf.className="leaf";
@@ -68,17 +67,22 @@ function createLeaf(){
 
     leaves.appendChild(leaf);
 
-    setTimeout(()=>{
+    const duration = parseFloat(leaf.style.animationDuration) * 1000;
+
+    setTimeout(() => {
 
         leaf.remove();
 
-    },18000);
+    }, duration + 500);
 
 }
 
-const isMobile = window.innerWidth <= 768;
+for (let i = 0; i < (isMobile ? 2 : 5); i++) {
+    createLeaf();
+}
 
-setInterval(
+
+const leafInterval = setInterval(
     createLeaf,
     isMobile ? 2500 : 1200
 );
@@ -93,12 +97,7 @@ document.getElementById("envelope");
 const seal =
 document.getElementById("seal");
 
-seal.addEventListener("click",()=>{
 
-    envelope.classList.add("open");
-    
-
-});
 let opened=false;
 
 seal.addEventListener("click",()=>{
@@ -143,7 +142,7 @@ function startMusic(){
 
 }
 openButton.addEventListener("click",()=>{
-
+    clearInterval(leafInterval);
     intro.classList.add("hide");
 
     website.classList.add("show");
