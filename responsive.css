@@ -1,0 +1,265 @@
+/* ==========================================================
+   RESPONSIVE - TABLET
+========================================================== */
+
+@media (max-width: 991px){
+
+    .introText h1{
+        font-size:64px;
+    }
+
+    .family{
+        font-size:12px;
+        letter-spacing:4px;
+    }
+
+    .invite{
+        font-size:15px;
+    }
+
+    #envelope{
+        width:min(650px,90vw);
+        margin-top:25px;
+    }
+
+    .paper-content{
+        padding:40px;
+    }
+
+    .paper-content h2{
+        font-size:42px;
+    }
+
+    #seal{
+        width:95px;
+        height:95px;
+        font-size:24px;
+    }
+
+    .flower-left,
+    .flower-right{
+        width:220px;
+    }
+
+}
+/* ==========================================================
+   RESPONSIVE - MOBILE
+========================================================== */
+
+@media (max-width:768px){
+
+    .introText{
+
+        margin-bottom:35px;
+        padding:0 20px;
+
+    }
+
+    .introText h1{
+
+        font-size:48px;
+        line-height:1.1;
+
+    }
+
+    .family{
+
+        font-size:11px;
+        letter-spacing:3px;
+
+    }
+
+    .invite{
+
+        font-size:14px;
+
+    }
+
+    #envelope{
+
+        width:92vw;
+        max-width:430px;
+
+        margin-top:15px;
+
+    }
+
+    .paper-content{
+
+        padding:15px;
+
+    }
+
+    .paper-content h2{
+
+        font-size:25px;
+        margin: 20px auto auto auto;
+
+    }
+    .gold-divider{
+        margin: 5px auto;
+    }
+
+    .paper-content p{
+
+        font-size:14px;
+
+    }
+
+    #openInvitation{
+
+        width:60%;
+        padding:12px;
+        margin-top: 20px;
+        font-size:12px;
+
+    }
+
+    #seal{
+
+        width:80px;
+        height:80px;
+
+        font-size:20px;
+
+    }
+
+    .clickHint{
+
+        font-size:13px;
+
+        margin-top:20px;
+
+    }
+
+    .flower-left{
+
+        width:170px;
+
+        top:-40px;
+        left:-60px;
+
+    }
+
+    .flower-right{
+
+        width:170px;
+
+        top:-40px;
+        right:-60px;
+
+    }
+
+    #musicButton{
+        position: fixed;
+        width:48px;
+        height:48px;
+
+        right: 15px;
+    bottom: 15px;
+        font-size:18px;
+
+    }
+
+}
+/* ==========================================================
+   RESPONSIVE - SMALL PHONES
+========================================================== */
+
+@media (max-width:480px){
+
+    .introText{
+
+        margin-bottom:25px;
+
+    }
+
+    .introText h1{
+
+        font-size:38px;
+
+    }
+
+    .family{
+
+        font-size:10px;
+
+        letter-spacing:2px;
+
+    }
+    .paper-content h2 {
+
+        margin:5px;
+
+    }
+    .gold-divider{
+        margin: 5px auto;
+    }
+    .paper-content{
+        padding:5px;
+    }
+    #openInvitation{
+        margin-top:5px;
+        width: 170px;
+        padding:9px;
+        font-size:12px;
+    }
+    .invite{
+
+        font-size:13px;
+
+    }
+
+    #envelope{
+
+        width:94vw;
+        max-width:350px;
+
+    }
+
+
+
+    .paper-content h2{
+
+        font-size:28px;
+
+    }
+
+    .paper-content p{
+
+        font-size:13px;
+
+        line-height:1.6;
+
+    }
+
+    .small-title{
+
+        font-size:10px;
+
+        letter-spacing:3px;
+
+    }
+
+    #seal{
+
+        width:68px;
+        height:68px;
+
+        font-size:18px;
+
+    }
+
+    .flower-left{
+
+        width:130px;
+
+    }
+
+    .flower-right{
+
+        width:130px;
+
+    }
+
+}
