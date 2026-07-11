@@ -651,6 +651,8 @@ z-index:100;
     user-select:none;
 
     animation:flowerFloat 8s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 
 }
 

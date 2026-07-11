@@ -88,6 +88,8 @@
 
         margin-top:15px;
         animation: envelopeFloatTablet 12s ease-in-out infinite;
+        will-change: transform;
+    transform: translateZ(0);
     }
 
 
@@ -237,6 +239,8 @@
         width:94vw;
         max-width:350px;
         animation: envelopeFloatMobile 12s ease-in-out infinite;
+        will-change: transform;
+    transform: translateZ(0);       
 
     }
 
