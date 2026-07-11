@@ -20,8 +20,10 @@ const leaves = document.getElementById("leaves");
 /* -----------------------------
    Golden Dust
 ------------------------------ */
+const particleCount =
+    window.innerWidth <= 768 ? 15 : 40;
 
-for(let i=0;i<40;i++){
+for(let i=0;i<particleCount;i++){
 
     const dot=document.createElement("span");
 
@@ -48,18 +50,22 @@ for(let i=0;i<40;i++){
 function createLeaf(){
 
     const leaf=document.createElement("img");
-
+    const isMobile = window.innerWidth <= 768;
     leaf.src="src/leaf.svg";
 
     leaf.className="leaf";
 
     leaf.style.left=Math.random()*100+"vw";
 
-    leaf.style.animationDuration=
-        (10+Math.random()*8)+"s";
+    leaf.style.animationDuration = isMobile
+    ? (18 + Math.random() * 8) + "s"
+    : (10 + Math.random() * 8) + "s";
 
-    leaf.style.transform=
-        `scale(${0.5+Math.random()})`;
+    const scale = isMobile
+    ? 0.25 + Math.random() * 0.30
+    : 0.45 + Math.random() * 0.50;
+
+    leaf.style.transform = `scale(${scale})`;
 
     leaves.appendChild(leaf);
 
@@ -71,7 +77,12 @@ function createLeaf(){
 
 }
 
-setInterval(createLeaf,1200);
+const isMobile = window.innerWidth <= 768;
+
+setInterval(
+    createLeaf,
+    isMobile ? 2500 : 1200
+);
 /* ==========================================================
    PART 4
    OPEN ENVELOPE

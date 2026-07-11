@@ -81,6 +81,19 @@
         max-width:430px;
 
         margin-top:15px;
+        animation: envelopeFloatTablet 12s ease-in-out infinite;
+    }
+
+
+    @keyframes envelopeFloatTablet{
+
+        0%,100%{
+            transform:translateY(0);
+        }
+
+        50%{
+            transform:translateY(-4px);
+        }
 
     }
 
@@ -214,7 +227,7 @@
 
         width:94vw;
         max-width:350px;
-        animation: envelopeFloatMobile 6s ease-in-out infinite;
+        animation: envelopeFloatMobile 12s ease-in-out infinite;
 
     }
 
