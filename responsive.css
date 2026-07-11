@@ -92,7 +92,7 @@
     transform: translateZ(0);
     }
 
-
+    /*
     @keyframes envelopeFloatTablet{
 
         0%,100%{
@@ -104,6 +104,7 @@
         }
 
     }
+        */
 
     .paper-content{
 
@@ -244,7 +245,7 @@
 
     }
 
-
+/*
     @keyframes envelopeFloatMobile{
 
         0%,100%{
@@ -256,7 +257,7 @@
         }
 
     }
-
+*/
 
 
 
