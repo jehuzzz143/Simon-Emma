@@ -667,31 +667,39 @@ z-index:100;
     width:260px;
     top:-70px;
     right:-70px;
-
-    transform:scaleX(-1);
-
+    animation: flowerFloatRight 8s ease-in-out infinite;
     animation-delay:3s;
+
+}
+
+@keyframes flowerFloatRight{
+
+    0%{
+        transform: scaleX(-1) translateY(0px) rotate(0deg);
+    }
+
+    50%{
+        transform: scaleX(-1) translateY(10px) rotate(2deg);
+    }
+
+    100%{
+        transform: scaleX(-1) translateY(0px) rotate(0deg);
+    }
 
 }
 
 @keyframes flowerFloat{
 
     0%{
-
-        transform:translateY(0px) rotate(0deg);
-
+        transform: translateY(0px) rotate(0deg);
     }
 
     50%{
-
-        transform:translateY(10px) rotate(2deg);
-
+        transform: translateY(10px) rotate(2deg);
     }
 
     100%{
-
-        transform:translateY(0px) rotate(0deg);
-
+        transform: translateY(0px) rotate(0deg);
     }
 
 }

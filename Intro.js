@@ -29,9 +29,8 @@ for(let i=0;i<particleCount;i++){
 
     dot.className="particle";
 
-    dot.style.left=Math.random()*100+"vw";
-
-    dot.style.top=Math.random()*100+"vh";
+    dot.style.top = Math.random() * window.innerHeight + "px";
+dot.style.left = Math.random() * window.innerWidth + "px";
 
     dot.style.animationDuration=
         (6+Math.random()*6)+"s";
