@@ -666,6 +666,7 @@ z-index:100;
     width:260px;
     top:-70px;
     right:-70px;
+    transform: scaleX(-1);
     /*
     animation: flowerFloatRight 8s ease-in-out infinite;
     animation-delay:3s;
