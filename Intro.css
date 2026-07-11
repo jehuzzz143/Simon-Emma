@@ -763,6 +763,10 @@ z-index:100;
     opacity:.4;
 
     animation:particleFloat linear infinite;
+    will-change:transform,opacity;
+    transform:translateZ(0);
+
+    backface-visibility:hidden;
 
 }
 
