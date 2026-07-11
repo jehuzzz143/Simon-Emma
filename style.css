@@ -11,6 +11,9 @@
     --ink:#3D2914;
     --paper:#FFFAF4;
     --max:1080px;
+
+
+    
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}

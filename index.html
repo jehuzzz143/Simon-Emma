@@ -17,10 +17,173 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="intro.css">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="style.css">
 </head>
 <body>
+<!-- =======================================================
+     INTRO
+======================================================= -->
+<!-- Music -->
 
-<div id="vine-wrap" aria-hidden="true">
+<button id="musicButton"
+        aria-label="Music">
+
+    ♪
+
+</button>
+<section id="intro">
+
+    <!-- Background -->
+
+    <div id="paperTexture"></div>
+
+    <div id="particles"></div>
+
+    <div id="leaves"></div>
+
+    <div id="flowers">
+
+        <img
+            src="src/flower-top-left.svg"
+            class="flower flower-left"
+            alt="">
+
+        <img
+            src="src/flower-bottom-right.svg"
+            class="flower flower-right"
+            alt="">
+
+    </div>
+
+    
+
+    <!-- Heading -->
+
+    <div class="introText">
+
+        <p class="family">
+
+            Together with their families
+
+        </p>
+
+        <h1>
+
+            Emma
+            <span>&</span>
+            Simon
+
+        </h1>
+
+        <p class="invite">
+
+            request the pleasure of your company
+
+        </p>
+
+    </div>
+
+    <!-- Envelope -->
+
+    <div id="envelope">
+
+        <div class="envelope-shadow"></div>
+
+        <div class="envelope-back"></div>
+
+        <div class="envelope-letter">
+
+            <div class="letter-paper">
+
+                <div class="paper-top"></div>
+
+                <div class="paper-content">
+
+                    <p class="small-title">
+
+                        Wedding Invitation
+
+                    </p>
+
+                    <h2>
+
+                        Emma & Simon
+
+                    </h2>
+
+                    <div class="gold-divider"></div>
+
+                    <p>
+
+                        We are delighted to invite
+                        you to celebrate our wedding.
+
+                    </p>
+
+                    <button id="openInvitation">
+
+                        Open Invitation
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="envelope-left"></div>
+
+        <div class="envelope-right"></div>
+
+        <div class="envelope-bottom"></div>
+
+        <div class="envelope-flap"></div>
+
+<div id="seal">
+    <span class="seal-text">E&S</span>
+    <span class="seal-shine"></span>
+</div>
+
+    </div>
+
+    <p class="clickHint">
+
+        Click the wax seal
+
+    </p>
+
+</section>
+<!-- =======================================================
+     MAIN WEBSITE
+======================================================= -->
+
+<main id="website">
+
+    <!--
+
+    Your wedding website starts here later.
+
+    Nothing here yet.
+
+    -->
+      <div>
+         <div id="vine-wrap" aria-hidden="true">
   <svg id="vine-svg" viewBox="0 0 60 3000" preserveAspectRatio="none">
     <path id="vine-path" d="M30 0
       C 10 150, 50 300, 30 450
@@ -31,7 +194,7 @@
       S 10 2550, 30 2700
       S 50 2900, 30 3000" />
   </svg>
-</div>
+  </div>
 
 <nav id="topnav">
   <div class="brandmark">E &amp; S</div>
@@ -396,6 +559,13 @@
   <p>OCTOBER 17, 2026 &nbsp;·&nbsp; WITH LOVE AND GRATITUDE</p>
 </footer>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+
+</main>
+
+
+
+<script src="Intro.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ---------- supabase connection ----------
@@ -860,7 +1030,11 @@ window.addEventListener('resize', () => {
     setGuestTrackPosition(marqueeState.currentTranslate);
   });
 });
-</script>
 
+</script>
+<!-- Background Music -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="src/piano.mp3" type="audio/mpeg">
+</audio>
 </body>
 </html>
