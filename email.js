@@ -9,22 +9,29 @@ async function sendWeddingReminder() {
 
     try {
 
-        const { data, error } = await supabaseClient.functions.invoke(
-            "swift-handler"
+        const response = await fetch(
+            "https://personal-t3vejdmt.outsystemscloud.com/Cat/rest/SendRSVP/RSVPSendEmail",
+            {
+                method: "POST"
+            }
         );
 
-        if (error) throw error;
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
 
-        alert(`✅ ${data.sent} email(s) sent.\n❌ ${data.failed} failed.`);
+        alert("✅ Wedding reminders sent successfully!");
 
     } catch (err) {
 
         console.error(err);
         alert("Failed to send reminders.\n\n" + err.message);
 
-    }
+    } finally {
 
-    sendReminderBtn.disabled = false;
-    sendReminderBtn.textContent = "📧 Send Wedding Reminder";
+        sendReminderBtn.disabled = false;
+        sendReminderBtn.textContent = "📧 Send Wedding Reminder";
+
+    }
 
 }

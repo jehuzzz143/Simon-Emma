@@ -1,5 +1,3 @@
-
-
 /*
 ==========================================================
 
@@ -20,114 +18,96 @@ const leaves = document.getElementById("leaves");
 /* -----------------------------
    Golden Dust
 ------------------------------ */
-const particleCount =
-    window.innerWidth <= 768 ? 15 : 40;
+const particleCount = window.innerWidth <= 768 ? 15 : 40;
 
-for(let i=0;i<particleCount;i++){
+for (let i = 0; i < particleCount; i++) {
+  const dot = document.createElement("span");
 
-    const dot=document.createElement("span");
+  dot.className = "particle";
+  dot.style.top = Math.random() * 100 + "vh";
+  dot.style.left = Math.random() * 100 + "vw";
 
-    dot.className="particle";
-dot.style.top = Math.random() * 100 + "vh";
-dot.style.left = Math.random() * 100 + "vw";
+  dot.style.animationDuration = 6 + Math.random() * 6 + "s";
 
-    dot.style.animationDuration=
-        (6+Math.random()*6)+"s";
+  dot.style.animationDelay = Math.random() * 6 + "s";
 
-    dot.style.animationDelay=
-        Math.random()*6+"s";
-
-    particles.appendChild(dot);
-
+  particles.appendChild(dot);
 }
 
 /* -----------------------------
    Falling Leaves
 ------------------------------ */
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
-function createLeaf(){
-    const leaf=document.createElement("img");
-    //const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    //const isMobile = window.innerWidth <= 768;
-    leaf.src="src/leaf.svg";
+function createLeaf() {
+  const leaf = document.createElement("img");
+  //const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  //const isMobile = window.innerWidth <= 768;
+  leaf.src = "src/leaf.svg";
 
-    leaf.className="leaf";
+  leaf.className = "leaf";
 
-    leaf.style.left=Math.random()*100+"vw";
+  leaf.style.left = Math.random() * 100 + "vw";
 
-    leaf.style.animationDuration = isMobile
-    ? (18 + Math.random() * 8) + "s"
-    : (10 + Math.random() * 8) + "s";
+  leaf.style.animationDuration = isMobile
+    ? 18 + Math.random() * 8 + "s"
+    : 10 + Math.random() * 8 + "s";
 
-    const scale = isMobile
-    ? 0.25 + Math.random() * 0.30
-    : 0.45 + Math.random() * 0.50;
+  const scale = isMobile
+    ? 0.25 + Math.random() * 0.3
+    : 0.45 + Math.random() * 0.5;
 
-    leaf.style.transform = `scale(${scale})`;
+  leaf.style.transform = `scale(${scale})`;
 
-    leaves.appendChild(leaf);
+  leaves.appendChild(leaf);
 
-    const duration = parseFloat(leaf.style.animationDuration) * 1000;
+  const duration = parseFloat(leaf.style.animationDuration) * 1000;
 
-    setTimeout(() => {
-
-        leaf.remove();
-
-    }, duration + 500);
-
+  setTimeout(() => {
+    leaf.remove();
+  }, duration + 500);
 }
 
 for (let i = 0; i < (isMobile ? 2 : 5); i++) {
-    createLeaf();
+  createLeaf();
 }
 
-
-const leafInterval = setInterval(
-    createLeaf,
-    isMobile ? 2500 : 1200
-);
+const leafInterval = setInterval(createLeaf, isMobile ? 2500 : 1200);
 /* ==========================================================
    PART 4
    OPEN ENVELOPE
 ========================================================== */
 
-const envelope =
-document.getElementById("envelope");
+const envelope = document.getElementById("envelope");
 
-const seal =
-document.getElementById("seal");
+const seal = document.getElementById("seal");
 
-
-let opened=false;
+let opened = false;
 
 seal.addEventListener("click", () => {
+  if (opened) return;
 
-    if (opened) return;
+  opened = true;
+  startMusic();
+  envelope.classList.add("open");
 
-    opened = true;
-    startMusic();
-    envelope.classList.add("open");
-    
-    // Wait 10 seconds, then open the invitation and scroll smoothly
+  // Wait 10 seconds, then open the invitation and scroll smoothly
+  setTimeout(() => {
+    clearInterval(leafInterval);
+    intro.classList.add("hide");
+    website.classList.add("show");
+    document.body.style.overflow = "auto";
+
+    // Tiny delay guarantees the browser renders the website before animating the scroll
     setTimeout(() => {
-        clearInterval(leafInterval); 
-        intro.classList.add("hide"); 
-        website.classList.add("show"); 
-        document.body.style.overflow = "auto"; 
-
-        // Tiny delay guarantees the browser renders the website before animating the scroll
-        setTimeout(() => {
-            const heroElement = document.getElementById("hero");
-            if (heroElement && isInvitationClicked == false) {
-                heroElement.scrollIntoView({ 
-                    behavior: "smooth", 
-                    block: "start" 
-                });
-            }
-        }, 50); // 50 milliseconds is invisible to the user but fixes rendering bugs
-
-    }, 10000); 
-
+      const heroElement = document.getElementById("hero");
+      if (heroElement && isInvitationClicked == false) {
+        heroElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 50); // 50 milliseconds is invisible to the user but fixes rendering bugs
+  }, 10000);
 });
 /* ==========================================================
    PART 5
@@ -144,46 +124,38 @@ const openButton = document.getElementById("openInvitation");
 
 let musicStarted = false;
 
-function startMusic(){
+function startMusic() {
+  if (musicStarted) return;
 
-    if(musicStarted) return;
-
-    bgMusic.play()
-        .then(()=>{
-
-            musicStarted = true;
-
-        })
-        .catch(err=>{
-
-            console.log("Autoplay blocked.", err);
-
-        });
-
+  bgMusic
+    .play()
+    .then(() => {
+      musicStarted = true;
+    })
+    .catch((err) => {
+      console.log("Autoplay blocked.", err);
+    });
 }
-openButton.addEventListener("click",()=>{
-    this.isInvitationClicked = true;
-    clearInterval(leafInterval);
-    intro.classList.add("hide");
+openButton.addEventListener("click", () => {
+  this.isInvitationClicked = true;
+  clearInterval(leafInterval);
+  intro.classList.add("hide");
 
-    website.classList.add("show");
+  website.classList.add("show");
 
-    document.body.style.overflow="auto";
-
+  document.body.style.overflow = "auto";
 });
 
 const musicButton = document.getElementById("musicButton");
 
 musicButton.addEventListener("click", () => {
+  console.log("Music button clicked");
 
-    console.log("Music button clicked");
-
-    if (bgMusic.paused) {
-        bgMusic.play();
-        console.log("Playing");
-    } else {
-        bgMusic.pause();
-        console.log("Paused");
-    }
-
+  if (bgMusic.paused) {
+    bgMusic.play();
+    console.log("Playing");
+  } else {
+    bgMusic.pause();
+    console.log("Paused");
+  }
 });

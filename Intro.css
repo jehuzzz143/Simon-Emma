@@ -4,668 +4,645 @@
    Base styles will be added in Part 2.
 ========================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 /* ==========================================================
    PART 2
    COLOR PALETTE
 ========================================================== */
 
-:root{
+:root {
 
-    --cream:#F8F4EE;
-    --paper:#FFFDF8;
+    --cream: #F8F4EE;
+    --paper: #FFFDF8;
 
-    --forest:#4B6650;
-    --sage:#738A73;
+    --forest: #4B6650;
+    --sage: #738A73;
 
-    --gold:#C8A461;
+    --gold: #C8A461;
 
-    --brown:#6B584A;
+    --brown: #6B584A;
 
-    --text:#7B6C60;
+    --text: #7B6C60;
 
-    --shadow:rgba(0,0,0,.16);
+    --shadow: rgba(0, 0, 0, .16);
 
 }
+
 /* ==========================================================
    BODY
 ========================================================== */
 
-html{
+html {
 
-    scroll-behavior:smooth;
+    scroll-behavior: smooth;
 
 }
 
-body{
+body {
 
-    font-family:"Jost",sans-serif;
-
-    background:var(--cream);
-
-    overflow:hidden;
-    overscroll-behavior:none;
+    font-family: "Jost", sans-serif;
+    background: var(--cream);
+    overflow: hidden;
+    overscroll-behavior: none;
 }
+
 /* ==========================================================
    INTRO
 ========================================================== */
 
-#intro{
+#intro {
+    position: fixed;
+    inset: 0;
 
-    position:fixed;
+    display: flex;
 
-    inset:0;
+    flex-direction: column;
 
-    display:flex;
+    justify-content: center;
 
-    flex-direction:column;
+    align-items: center;
 
-    justify-content:center;
-
-    align-items:center;
-
-    overflow:hidden;
+    overflow: hidden;
     min-height: 100vh;
     min-height: 100dvh;
     background:
-    
 
-    radial-gradient(
 
-    circle at top,
+        radial-gradient(circle at top,
 
-    #fffefc,
+            #fffefc,
 
-    #f7f3ed 40%,
+            #f7f3ed 40%,
 
-    #efe5d8
-
-    );
+            #efe5d8);
 
 }
+
 /* ==========================================================
    PAPER TEXTURE
 ========================================================== */
 
-#paperTexture{
+#paperTexture {
 
-    position:absolute;
+    position: absolute;
 
-    inset:0;
+    inset: 0;
 
     background-image:
 
-    url("src/paper-texture.png");
+        url("src/paper-texture.png");
 
-    opacity:.08;
+    opacity: .08;
 
-    mix-blend-mode:multiply;
+    mix-blend-mode: multiply;
 
-    pointer-events:none;
+    pointer-events: none;
 
 }
+
 /* ==========================================================
    SUNLIGHT
 ========================================================== */
 
-#intro::before{
+#intro::before {
 
-content:"";
+    content: "";
 
-position:absolute;
+    position: absolute;
 
-width:900px;
+    width: 900px;
 
-height:900px;
+    height: 900px;
 
-top:-420px;
+    top: -420px;
 
-left:-250px;
+    left: -250px;
 
-background:
+    background:
 
-radial-gradient(circle,
+        radial-gradient(circle,
 
-rgba(255,255,255,.95),
+            rgba(255, 255, 255, .95),
 
-transparent 70%);
+            transparent 70%);
 
-filter:blur(40px);
+    filter: blur(40px);
 
 }
+
 /* ==========================================================
    INTRO TEXT
 ========================================================== */
 
-.introText{
+.introText {
 
-    text-align:center;
+    text-align: center;
 
-    margin-bottom:70px;
+    margin-bottom: 70px;
 
-    z-index:20;
-
-}
-
-.flower-right{
-    width:280px;
-    top:-80px;
-    right:-80px;
-}
-.family{
-
-    font-size:13px;
-
-    letter-spacing:5px;
-
-    text-transform:uppercase;
-
-    color:#A08C7B;
+    z-index: 20;
 
 }
 
-.introText h1{
+.flower-right {
+    width: 280px;
+    top: -80px;
+    right: -80px;
+}
+
+.family {
+
+    font-size: 13px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: #A08C7B;
+
+}
+
+.introText h1 {
 
     font-family:
 
-    "Cormorant Garamond";
+        "Cormorant Garamond";
 
-    font-size:84px;
+    font-size: 84px;
 
-    font-weight:600;
+    font-weight: 600;
 
-    color:var(--forest);
+    color: var(--forest);
 
-    margin:18px 0;
-
-}
-
-.introText span{
-
-    color:var(--gold);
+    margin: 18px 0;
 
 }
 
-.invite{
+.introText span {
 
-    font-size:17px;
-
-    color:#8F7B69;
-
-    letter-spacing:2px;
+    color: var(--gold);
 
 }
+
+.invite {
+
+    font-size: 17px;
+
+    color: #8F7B69;
+
+    letter-spacing: 2px;
+
+}
+
 /* ==========================================================
    ENVELOPE
 ========================================================== */
 
-#envelope{
-margin-top:40px;
+#envelope {
+    margin-top: 40px;
 
-    position:relative;
+    position: relative;
 
-    width:min(760px,82vw);
+    width: min(760px, 82vw);
 
-    aspect-ratio:1.55;
+    aspect-ratio: 1.55;
 
-    z-index:10;
-
-}
-.envelope-shadow{
-
-position:absolute;
-
-left:8%;
-
-right:8%;
-
-bottom:-40px;
-
-height:40px;
-
-background:rgba(0,0,0,.18);
-
-filter:blur(25px);
-
-border-radius:50%;
+    z-index: 10;
 
 }
-.envelope-back{
 
-position:absolute;
+.envelope-shadow {
 
-inset:0;
+    position: absolute;
 
-background:
+    left: 8%;
 
-linear-gradient(
+    right: 8%;
 
-180deg,
+    bottom: -40px;
 
-#F6ECDD,
+    height: 40px;
 
-#E8D8C7
+    background: rgba(0, 0, 0, .18);
 
-);
+    filter: blur(25px);
 
-border-radius:14px;
-
-box-shadow:
-0 35px 80px rgba(0,0,0,.22),
-0 10px 25px rgba(0,0,0,.08);
-
-}
-.envelope-left{
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-bottom:0;
-
-width:50%;
-
-background:#E6D6C5;
-
-clip-path:
-
-polygon(
-
-0 0,
-
-100% 50%,
-
-0 100%
-
-);
-
-}
-.envelope-right{
-
-position:absolute;
-
-right:0;
-
-top:0;
-
-bottom:0;
-
-width:50%;
-
-background:#E3D2C0;
-
-clip-path:
-
-polygon(
-
-100% 0,
-
-0 50%,
-
-100% 100%
-
-);
-
-}
-.envelope-bottom{
-
-position:absolute;
-
-left:0;
-
-right:0;
-
-bottom:0;
-
-height:58%;
-
-background:#EADACA;
-
-clip-path:
-
-polygon(
-
-0 100%,
-
-50% 0,
-
-100% 100%
-
-);
-
-}
-.envelope-flap{
-
-position:absolute;
-
-left:0;
-
-right:0;
-
-top:0;
-
-height:55%;
-
-background:#F5ECE2;
-
-clip-path:
-
-polygon(
-
-0 0,
-
-100% 0,
-
-50% 100%
-
-);
-
-transform-origin:top;
-
-z-index:30;
-
-}
-.envelope-letter{
-
-position:absolute;
-
-left:7%;
-
-right:7%;
-
-bottom:5%;
-
-height:82%;
-
-z-index:5;
+    border-radius: 50%;
 
 }
 
-.letter-paper{
+.envelope-back {
 
-height:100%;
+    position: absolute;
 
-background:#FFFDF9;
+    inset: 0;
 
-border-radius:10px;
+    background:
 
-box-shadow:
+        linear-gradient(180deg,
 
-0 18px 40px rgba(0,0,0,.15);
+            #F6ECDD,
 
-overflow:hidden;
+            #E8D8C7);
 
-}
+    border-radius: 14px;
 
-.paper-top{
-
-height:18px;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-#CBA256,
-
-#F2DEB5,
-
-#C89A4E
-
-);
-
-}
-.paper-content{
-
-padding:55px;
-
-text-align:center;
+    box-shadow:
+        0 35px 80px rgba(0, 0, 0, .22),
+        0 10px 25px rgba(0, 0, 0, .08);
 
 }
 
-.small-title{
+.envelope-left {
 
-letter-spacing:5px;
+    position: absolute;
 
-font-size:12px;
+    left: 0;
 
-text-transform:uppercase;
+    top: 0;
 
-color:#A18D79;
+    bottom: 0;
 
-}
+    width: 50%;
 
-.paper-content h2{
+    background: #E6D6C5;
 
-font-family:
+    clip-path:
 
-"Cormorant Garamond";
+        polygon(0 0,
 
-font-size:52px;
+            100% 50%,
 
-margin:18px 0;
-
-color:var(--forest);
+            0 100%);
 
 }
 
-.gold-divider{
+.envelope-right {
 
-width:90px;
+    position: absolute;
 
-height:2px;
+    right: 0;
 
-margin:25px auto;
+    top: 0;
 
-background:
+    bottom: 0;
 
-linear-gradient(
+    width: 50%;
 
-90deg,
+    background: #E3D2C0;
 
-transparent,
+    clip-path:
 
-var(--gold),
+        polygon(100% 0,
 
-transparent
+            0 50%,
 
-);
+            100% 100%);
+
+}
+
+.envelope-bottom {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    height: 58%;
+
+    background: #EADACA;
+
+    clip-path:
+
+        polygon(0 100%,
+
+            50% 0,
+
+            100% 100%);
 
 }
 
-.paper-content p{
+.envelope-flap {
 
-color:var(--text);
+    position: absolute;
 
-line-height:1.8;
+    left: 0;
+
+    right: 0;
+
+    top: 0;
+
+    height: 55%;
+
+    background: #F5ECE2;
+
+    clip-path:
+
+        polygon(0 0,
+
+            100% 0,
+
+            50% 100%);
+
+    transform-origin: top;
+
+    z-index: 30;
 
 }
+
+.envelope-letter {
+
+    position: absolute;
+
+    left: 7%;
+
+    right: 7%;
+
+    bottom: 5%;
+
+    height: 82%;
+
+    z-index: 5;
+
+}
+
+.letter-paper {
+
+    height: 100%;
+
+    background: #FFFDF9;
+
+    border-radius: 10px;
+
+    box-shadow:
+
+        0 18px 40px rgba(0, 0, 0, .15);
+
+    overflow: hidden;
+
+}
+
+.paper-top {
+
+    height: 18px;
+
+    background:
+
+        linear-gradient(90deg,
+
+            #CBA256,
+
+            #F2DEB5,
+
+            #C89A4E);
+
+}
+
+.paper-content {
+
+    padding: 55px;
+
+    text-align: center;
+
+}
+
+.small-title {
+
+    letter-spacing: 5px;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    color: #A18D79;
+
+}
+
+.paper-content h2 {
+
+    font-family:
+
+        "Cormorant Garamond";
+
+    font-size: 52px;
+
+    margin: 18px 0;
+
+    color: var(--forest);
+
+}
+
+.gold-divider {
+
+    width: 90px;
+
+    height: 2px;
+
+    margin: 25px auto;
+
+    background:
+
+        linear-gradient(90deg,
+
+            transparent,
+
+            var(--gold),
+
+            transparent);
+
+}
+
+.paper-content p {
+
+    color: var(--text);
+
+    line-height: 1.8;
+
+}
+
 /* ==========================================================
    BUTTON
 ========================================================== */
 
-#openInvitation{
+#openInvitation {
 
-margin-top:40px;
+    margin-top: 40px;
 
-padding:15px 36px;
+    padding: 15px 36px;
 
-border:none;
+    border: none;
 
-border-radius:40px;
-opacity:0;
+    border-radius: 40px;
+    opacity: 0;
 
-visibility:hidden;
+    visibility: hidden;
 
-background:
+    background:
 
-linear-gradient(
+        linear-gradient(135deg,
 
-135deg,
+            var(--forest),
 
-var(--forest),
+            var(--sage));
 
-var(--sage)
+    color: white;
 
-);
+    font-size: 15px;
 
-color:white;
+    letter-spacing: 2px;
 
-font-size:15px;
+    cursor: pointer;
 
-letter-spacing:2px;
-
-cursor:pointer;
-
-transition:.3s;
+    transition: .3s;
 
 }
 
-#openInvitation:hover{
+#openInvitation:hover {
 
-transform:translateY(-4px);
+    transform: translateY(-4px);
 
-box-shadow:
+    box-shadow:
 
-0 20px 40px rgba(75,102,80,.35);
+        0 20px 40px rgba(75, 102, 80, .35);
 
 }
+
 /* ==========================================================
    WAX SEAL
 ========================================================== */
 
-#seal{
+#seal {
 
-position:absolute;
+    position: absolute;
 
-left:50%;
+    left: 50%;
 
-top:50%;
+    top: 50%;
 
-transform:translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 
-width:110px;
+    width: 110px;
 
-height:110px;
+    height: 110px;
 
-border-radius:50%;
+    border-radius: 50%;
 
-background:
+    background:
 
-radial-gradient(
+        radial-gradient(circle at 30% 30%,
 
-circle at 30% 30%,
+            #DFC983,
 
-#DFC983,
+            #B2823F);
 
-#B2823F
+    display: flex;
 
-);
+    justify-content: center;
 
-display:flex;
+    align-items: center;
 
-justify-content:center;
+    font-family:
 
-align-items:center;
+        "Cormorant Garamond";
 
-font-family:
+    font-size: 30px;
 
-"Cormorant Garamond";
+    color: white;
 
-font-size:30px;
+    box-shadow:
 
-color:white;
+        0 18px 35px rgba(0, 0, 0, .22);
 
-box-shadow:
+    z-index: 50;
 
-0 18px 35px rgba(0,0,0,.22);
+    cursor: pointer;
 
-z-index:50;
-
-cursor:pointer;
-
-overflow:hidden;
+    overflow: hidden;
 
 }
+
 /* ==========================================================
    MUSIC BUTTON
 ========================================================== */
 
-#musicButton{
+#musicButton {
 
-position: fixed;
-right: 20px;
-bottom: 20px;
-width:54px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 54px;
 
-height:54px;
+    height: 54px;
 
-border:none;
+    border: none;
 
-border-radius:50%;
+    border-radius: 50%;
 
-background:white;
+    background: white;
 
-font-size:22px;
+    font-size: 22px;
 
-cursor:pointer;
+    cursor: pointer;
 
-box-shadow:
+    box-shadow:
 
-0 15px 35px rgba(0,0,0,.12);
+        0 15px 35px rgba(0, 0, 0, .12);
 
-z-index:100;
+    z-index: 100;
 
 }
+
 /* ==========================================================
    WEBSITE
 ========================================================== */
 
-#website{
+#website {
 
-    display:none;
+    display: none;
 
 }
+
 /* ==========================================================
    PART 3
    FLOWER ANIMATION
 ========================================================== */
 
-.flower{
+.flower {
 
-    position:absolute;
-    pointer-events:none;
-    user-select:none;
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
 
-    animation:flowerFloat 8s ease-in-out infinite;
+    animation: flowerFloat 8s ease-in-out infinite;
     will-change: transform;
     transform: translateZ(0);
 
 }
 
-.flower-left{
+.flower-left {
 
-    width:260px;
-    top:-70px;
-    left:-70px;
+    width: 260px;
+    top: -70px;
+    left: -70px;
     /*
     animation: flowerFloatRight 8s ease-in-out infinite;
     animation-delay:3s;
     */
 }
 
-.flower-right{
+.flower-right {
 
-    width:260px;
-    top:-70px;
-    right:-70px;
+    width: 260px;
+    top: -70px;
+    right: -70px;
     transform: scaleX(-1) !important;
     /*
     animation: flowerFloatRight 8s ease-in-out infinite;
@@ -673,6 +650,7 @@ z-index:100;
     */
 
 }
+
 /*
 @keyframes flowerFloatRight{
 
@@ -690,233 +668,230 @@ z-index:100;
 
 }
 */
-@keyframes flowerFloat{
+@keyframes flowerFloat {
 
-    0%{
+    0% {
         transform: translateY(0px) rotate(0deg);
     }
 
-    50%{
+    50% {
         transform: translateY(10px) rotate(2deg);
     }
 
-    100%{
+    100% {
         transform: translateY(0px) rotate(0deg);
     }
 
 }
+
 /* ==========================================================
    ENVELOPE FLOAT
 ========================================================== */
 
-#envelope{
+#envelope {
 
-    animation:envelopeFloat 6s ease-in-out infinite;
+    animation: envelopeFloat 6s ease-in-out infinite;
+
+}
+
+@keyframes envelopeFloat {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-12px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
 
 }
 
-@keyframes envelopeFloat{
-
-    0%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-12px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
-
-}
 /* ==========================================================
    PARTICLES
 ========================================================== */
 
-#particles{
+#particles {
 
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-
-}
-
-.particle{
-
-    position:absolute;
-
-    width:10px;
-    height:10px;
-
-    border-radius:50%;
-
-    background:#d4b16b;
-
-    opacity:.4;
-
-    animation:particleFloat linear infinite;
-    will-change:transform,opacity;
-    transform:translateZ(0);
-
-    backface-visibility:hidden;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
 
 }
 
-@keyframes particleFloat{
+.particle {
 
-    0%{
+    position: absolute;
 
-        transform:translateY(20px);
-        opacity:0;
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #d4b16b;
+
+    opacity: .4;
+
+    animation: particleFloat linear infinite;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+
+    backface-visibility: hidden;
+
+}
+
+@keyframes particleFloat {
+
+    0% {
+
+        transform: translateY(20px);
+        opacity: 0;
 
     }
 
-    20%{
+    20% {
 
-        opacity:.5;
-
-    }
-
-    80%{
-
-        opacity:.5;
+        opacity: .5;
 
     }
 
-    100%{
+    80% {
 
-        transform:translateY(-120px);
-        opacity:0;
+        opacity: .5;
+
+    }
+
+    100% {
+
+        transform: translateY(-120px);
+        opacity: 0;
 
     }
 
 }
+
 /* ==========================================================
    LEAVES
 ========================================================== */
 
-.leaf{
+.leaf {
 
-    position:absolute;
+    position: absolute;
 
-    width:28px;
+    width: 28px;
 
-    top:-80px;
+    top: -80px;
 
-    pointer-events:none;
+    pointer-events: none;
 
-    opacity:.85;
+    opacity: .85;
 
-    animation:leafFall linear forwards;
+    animation: leafFall linear forwards;
 
 }
 
-@keyframes leafFall{
+@keyframes leafFall {
 
-    0%{
+    0% {
 
         transform:
-        translateY(-100px)
-        rotate(0deg);
+            translateY(-100px) rotate(0deg);
 
     }
 
-    25%{
+    25% {
 
         transform:
-        translateY(25vh)
-        translateX(-30px)
-        rotate(90deg);
+            translateY(25vh) translateX(-30px) rotate(90deg);
 
     }
 
-    50%{
+    50% {
 
         transform:
-        translateY(50vh)
-        translateX(20px)
-        rotate(180deg);
+            translateY(50vh) translateX(20px) rotate(180deg);
 
     }
 
-    75%{
+    75% {
 
         transform:
-        translateY(75vh)
-        translateX(-20px)
-        rotate(270deg);
+            translateY(75vh) translateX(-20px) rotate(270deg);
 
     }
 
-    100%{
+    100% {
 
         transform:
-        translateY(120vh)
-        translateX(40px)
-        rotate(360deg);
+            translateY(120vh) translateX(40px) rotate(360deg);
 
     }
 
 }
+
 /* ==========================================================
    MUSIC BUTTON
 ========================================================== */
 
-#musicButton{
+#musicButton {
 
-    transition:.35s;
+    transition: .35s;
 
 }
 
-#musicButton:hover{
+#musicButton:hover {
 
-    transform:scale(1.12);
+    transform: scale(1.12);
 
     box-shadow:
 
-        0 20px 45px rgba(0,0,0,.18);
+        0 20px 45px rgba(0, 0, 0, .18);
 
 }
+
 /* ==========================================================
    PART 4
    INITIAL ENVELOPE STATE
 ========================================================== */
 
-.envelope-letter{
+.envelope-letter {
 
-    overflow:hidden;
+    overflow: hidden;
 
 }
 
-.letter-paper{
+.letter-paper {
 
-    transform:translateY(100%);
+    transform: translateY(100%);
     background-image: url(src/paper-texture.png);
     object-fit: cover;
     transition:
-    
-    transform 1.3s cubic-bezier(.22,.9,.2,1);
+
+        transform 1.3s cubic-bezier(.22, .9, .2, 1);
 
 }
+
 /* ==========================================================
    INVITATION BUTTON
 ========================================================== */
 
-#openInvitation{
+#openInvitation {
 
-    opacity:0;
+    opacity: 0;
 
-    visibility:hidden;
+    visibility: hidden;
 
-    transform:translateY(20px);
+    transform: translateY(20px);
 
     transition:
 
@@ -925,15 +900,16 @@ z-index:100;
         transform .5s ease;
 
 }
+
 /* ==========================================================
    LETTER CONTENT
 ========================================================== */
 
-.paper-content{
+.paper-content {
 
-    opacity:0;
+    opacity: 0;
 
-    transform:translateY(25px);
+    transform: translateY(25px);
 
     transition:
 
@@ -942,63 +918,66 @@ z-index:100;
         transform .8s ease;
 
 }
+
 /* ==========================================================
    OPEN STATE
 ========================================================== */
 
-#envelope.open .letter-paper{
+#envelope.open .letter-paper {
 
-    transform:translateY(0);
-
-}
-
-#envelope.open .paper-content{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-    transition-delay:.8s;
+    transform: translateY(0);
 
 }
 
-#envelope.open #openInvitation{
+#envelope.open .paper-content {
 
-    opacity:1;
+    opacity: 1;
 
-    visibility:visible;
+    transform: translateY(0);
 
-    transform:translateY(0);
-
-    transition-delay:1.2s;
+    transition-delay: .8s;
 
 }
+
+#envelope.open #openInvitation {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+    transition-delay: 1.2s;
+
+}
+
 /* ==========================================================
    FLAP
 ========================================================== */
 
-.envelope-flap{
+.envelope-flap {
 
     transition:
 
-        transform 1s cubic-bezier(.22,.9,.2,1);
+        transform 1s cubic-bezier(.22, .9, .2, 1);
 
-    transform-origin:top;
+    transform-origin: top;
 
 }
 
-#envelope.open .envelope-flap{
+#envelope.open .envelope-flap {
 
     transform:
 
         rotateX(180deg);
 
 }
+
 /* ==========================================================
    WAX SEAL
 ========================================================== */
 
-#seal{
+#seal {
 
     transition:
 
@@ -1008,32 +987,30 @@ z-index:100;
 
 }
 
-#envelope.open #seal{
+#envelope.open #seal {
 
     transform:
 
-        translate(-50%,-50%)
+        translate(-50%, -50%) scale(.15) rotate(280deg);
 
-        scale(.15)
-
-        rotate(280deg);
-
-    opacity:0;
+    opacity: 0;
 
 }
-.envelope-flap{
+
+.envelope-flap {
 
     box-shadow:
 
-        inset 0 -8px 18px rgba(0,0,0,.06);
+        inset 0 -8px 18px rgba(0, 0, 0, .06);
 
 }
+
 /* ==========================================================
    PART 5
    WEBSITE TRANSITION
 ========================================================== */
 
-#intro{
+#intro {
 
     transition:
         opacity .8s ease,
@@ -1041,20 +1018,20 @@ z-index:100;
 
 }
 
-#intro.hide{
+#intro.hide {
 
-    opacity:0;
-    visibility:hidden;
+    opacity: 0;
+    visibility: hidden;
 
 }
 
-#website{
+#website {
 
-    display:block;
+    display: block;
 
-    opacity:0;
+    opacity: 0;
 
-    visibility:hidden;
+    visibility: hidden;
 
     transition:
 
@@ -1062,10 +1039,10 @@ z-index:100;
 
 }
 
-#website.show{
+#website.show {
 
-    opacity:1;
+    opacity: 1;
 
-    visibility:visible;
+    visibility: visible;
 
 }
