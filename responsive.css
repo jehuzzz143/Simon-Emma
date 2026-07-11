@@ -12,11 +12,14 @@
         font-size:12px;
         letter-spacing:4px;
     }
-
+    #particle{
+        width:6px;
+        height:6px;
+    }
     .invite{
         font-size:15px;
     }
-
+    
     #envelope{
         width:min(650px,90vw);
         margin-top:25px;
@@ -61,7 +64,10 @@
         line-height:1.1;
 
     }
-
+    #particle{
+        width:5px;
+        height:5px;
+    }
     .family{
 
         font-size:11px;
@@ -192,7 +198,10 @@
         font-size:38px;
 
     }
-
+    #particle{
+        width:5px;
+        height:5px;
+    }
     .family{
 
         font-size:10px;
