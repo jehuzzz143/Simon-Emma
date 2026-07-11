@@ -100,13 +100,33 @@ document.getElementById("seal");
 
 let opened=false;
 
-seal.addEventListener("click",()=>{
+seal.addEventListener("click", () => {
 
-    if(opened) return;
+    if (opened) return;
 
-    opened=true;
+    opened = true;
     startMusic();
     envelope.classList.add("open");
+    
+    // Wait 10 seconds, then open the invitation and scroll smoothly
+    setTimeout(() => {
+        clearInterval(leafInterval); 
+        intro.classList.add("hide"); 
+        website.classList.add("show"); 
+        document.body.style.overflow = "auto"; 
+
+        // Tiny delay guarantees the browser renders the website before animating the scroll
+        setTimeout(() => {
+            const heroElement = document.getElementById("hero");
+            if (heroElement) {
+                heroElement.scrollIntoView({ 
+                    behavior: "smooth", 
+                    block: "start" 
+                });
+            }
+        }, 50); // 50 milliseconds is invisible to the user but fixes rendering bugs
+
+    }, 10000); 
 
 });
 /* ==========================================================
