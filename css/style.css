@@ -132,6 +132,39 @@
       linear-gradient(180deg, var(--paper) 0%, var(--autumn-cream) 100%);
     overflow:hidden;
   }
+
+  #hero{
+    position: relative;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 120px 24px 80px;
+
+background:
+    radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.3) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(250,245,235,.65), rgba(245,236,220,.65)),
+    url("https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    center center / cover no-repeat;
+background-attachment: fixed;
+overflow: hidden;
+  }
+
+  /* Desktop */
+@media (min-width: 769px) {
+    #yourSection {
+        background-attachment: fixed;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #yourSection {
+        background-attachment: scroll;
+    }
+}
   #hero .eyebrow{ opacity:0; animation:fadeUp .9s ease .2s forwards; }
   #hero h1{
     font-size:clamp(3rem, 9vw, 7.4rem); line-height:.98;
