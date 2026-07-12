@@ -1,0 +1,214 @@
+:root{
+    --bg:#f7f4ee;
+    --card:#fff;
+    --line:#e7e1d7;
+    --text:#243127;
+    --muted:#6d776e;
+    --sage:#4F6F52;
+    --sage-soft:#e9efe9;
+    --ok:#35523A;
+    --ok-bg:#edf5ee;
+    --hide:#6f644d;
+    --hide-bg:#f3efe8;
+    --err:#8b3a3a;
+    --err-bg:#f7ecec;
+    --shadow:0 12px 30px rgba(0,0,0,.08);
+    --radius:18px;
+}
+
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:24px 16px 40px;
+}
+
+h1{margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 24px}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+}
+
+.btn{
+    border:0;
+    background:var(--sage);
+    color:#fff;
+    padding:11px 16px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.18s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn.secondary{background:var(--sage-soft);color:var(--sage)}
+.btn.small{padding:8px 12px;font-size:.9rem}
+.btn.hide{background:var(--hide-bg);color:var(--hide)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:18px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+}
+
+.stat{padding:18px}
+.stat-label{font-size:.9rem;color:var(--muted);margin-bottom:8px}
+.stat-value{font-size:2rem;font-weight:700}
+
+.status{
+    display:none;
+    margin-bottom:14px;
+    padding:12px 14px;
+    border-radius:12px;
+    line-height:1.45;
+}
+.status.show{display:block}
+.status.ok{background:var(--ok-bg);color:var(--ok)}
+.status.err{background:var(--err-bg);color:var(--err)}
+
+.panel{padding:16px}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:1080px}
+th,td{
+    padding:12px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+}
+th{
+    font-size:.9rem;
+    color:var(--muted);
+    background:#faf8f3;
+}
+
+.muted{color:var(--muted)}
+.message{
+    max-width:340px;
+    white-space:pre-wrap;
+    line-height:1.45;
+}
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:26px;
+}
+
+.status-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:.82rem;
+    font-weight:600;
+    white-space:nowrap;
+}
+.status-pill.visible{
+    background:var(--ok-bg);
+    color:var(--ok);
+}
+.status-pill.hidden{
+    background:var(--hide-bg);
+    color:var(--hide);
+}
+
+.action-stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:8px;
+}
+
+.modal-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    z-index:999;
+}
+.modal-backdrop.open{display:flex}
+
+.modal{
+    width:min(640px,100%);
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    border:1px solid var(--line);
+    box-shadow:0 24px 60px rgba(0,0,0,.18);
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+    gap:10px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+.field.full{grid-column:1/-1}
+
+label{
+    font-size:.92rem;
+    font-weight:600;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    font:inherit;
+    background:#fff;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:16px;
+}
+
+@media (max-width:800px){
+    .stats,.form-grid{grid-template-columns:1fr}
+    table{min-width:820px}
+}
