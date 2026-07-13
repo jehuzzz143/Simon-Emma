@@ -94,16 +94,10 @@ search.addEventListener("input", function(){
                     Hello ${guest.name}
                 </div>
 
-                <p>Your table assignment</p>
+                <p>Your table assignment is</p>
 
                 <div class="table">
                     TABLE ${guest.table}
-                </div>
-
-                <div class="message">
-                    We look forward to celebrating our special day with you.
-                    <br>
-                    <br> - Simon & Emma -
                 </div>
 
             </div>
