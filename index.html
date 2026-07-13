@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/Intro.css">
 <link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/seat.css">
 
     <!-- Google Fonts -->
 
@@ -141,9 +142,9 @@
       <div class="navlinks">
         <a href="#story">Our Story</a>
         <a href="#dress-code">Dress Code</a>
-        <a href="#rsvp">RSVP</a>
-        <a href="#venue">Venue</a>
         <a href="#qa" class="hide-xs">Q&amp;A</a>
+        <a href="#venue">Venue</a>
+        <a href="#rsvp">RSVP</a>
         <a href="photos.html">Photos</a>
       </div>
     </nav>
@@ -223,6 +224,53 @@
       </div>
     </section>
 
+
+
+    <section id="photos">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Captured Moments</div>
+          <h2>Memories</h2>
+          <p>A glimpse of us — and the world we're building together. </p>
+        </div>
+
+        <div class="photo-masonry" id="photo-grid">
+          <div class="photo-tile tall" data-delay="1">
+            <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2fcf?w=500&q=80" alt="Engagement portrait">
+            <div class="photo-cap">Engagement Session</div>
+          </div>
+          <div class="photo-tile square" data-delay="2">
+            <img src="https://images.unsplash.com/photo-1529636798458-92179e477f74?w=500&q=80" alt="Couple laughing">
+            <div class="photo-cap">Sunday Morning</div>
+          </div>
+          <div class="photo-tile wide" data-delay="3">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc791c3?w=600&q=80" alt="Hands together">
+            <div class="photo-cap">Details</div>
+          </div>
+          <div class="photo-tile tall" data-delay="1">
+            <img src="https://images.unsplash.com/photo-1528892952291-009c663ce843?w=500&q=80" alt="Walking together">
+            <div class="photo-cap">City Stroll</div>
+          </div>
+          <div class="photo-tile square" data-delay="2">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae24b?w=500&q=80" alt="Sunset moment">
+            <div class="photo-cap">Golden Hour</div>
+          </div>
+          <div class="photo-tile wide" data-delay="3">
+            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Garden setting">
+            <div class="photo-cap">The Venue</div>
+          </div>
+          <div class="photo-tile tall" data-delay="4">
+            <img src="https://images.unsplash.com/photo-1583939003609-6e45a02e64d8?w=500&q=80" alt="Ring detail">
+            <div class="photo-cap">The Ring</div>
+          </div>
+          <div class="photo-tile square" data-delay="2">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80" alt="Couple portrait">
+            <div class="photo-cap">Us</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="dress-code">
       <div class="wrap">
         <div class="section-head reveal">
@@ -261,51 +309,58 @@
       </div>
     </section>
 
-    <section id="rsvp">
+    <section id="qa">
       <div class="wrap">
         <div class="section-head reveal">
-          <div class="eyebrow">Kindly Reply By October 01, 2026</div>
-          <h2>RSVP</h2>
-          <p>We can't wait to celebrate with you. Please let us know if you'll be joining us — and don't forget to mention any dietary requirements.</p>
+          <div class="eyebrow">Got Questions?</div>
+          <h2>Q&amp;A</h2>
+          <p>Everything you might want to know before the big day. Can't find your answer? Reach us at <a href="mailto:hello@emmaandsimon.com" style="color:var(--autumn-deep);">hello@emmaandsimon.com</a>.</p>
         </div>
 
-        <form id="rsvp-form" class="reveal-scale">
-          <input type="hidden" name="_subject" value="New Wedding RSVP Submission">
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Your email" required>
+        <div class="faq-list">
+          <div class="faq-item reveal" data-delay="1">
+            <button class="faq-q" aria-expanded="false">
+              Can I bring a plus-one?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a"><p>Your invitation indicates whether a plus-one is included. If you're unsure, please reach out to us directly — we'd love to accommodate where we can.</p></div>
           </div>
-
-          <div class="field">
-            <label for="name">Full name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
+          <div class="faq-item reveal" data-delay="2">
+            <button class="faq-q" aria-expanded="false">
+              Are children welcome?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a"><p>We adore your little ones, but we've planned an adults-only celebration so everyone can relax and enjoy the evening. Nursing infants are absolutely welcome.</p></div>
           </div>
-
-          <div class="field">
-            <label>Will you be attending?</label>
-            <div class="radio-row">
-              <label class="radio-pill" id="pill-yes">
-                <input type="radio" name="attending" value="Joyfully accepts" required> Joyfully accepts
-              </label>
-              <label class="radio-pill" id="pill-no">
-                <input type="radio" name="attending" value="Regretfully declines" required> Regretfully declines
-              </label>
-            </div>
+          <div class="faq-item reveal" data-delay="3">
+            <button class="faq-q" aria-expanded="false">
+              Is there a gift registry?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a"><p>Your presence is the greatest gift. If you'd like to give something, we've set up a honeymoon fund — details will be shared in your invitation packet. No boxed gifts, please.</p></div>
           </div>
-
-          <div class="field">
-            <label for="guests">Number of guests (including you)</label>
-            <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
+          <div class="faq-item reveal" data-delay="4">
+            <button class="faq-q" aria-expanded="false">
+              What about dietary restrictions?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a"><p>Please note any allergies or dietary needs in your RSVP message. Our caterer offers vegetarian, vegan, and gluten-free options — just let us know in advance.</p></div>
           </div>
-
-          <div class="field">
-            <label for="message">Message or well-wishes</label>
-            <textarea id="message" name="message" placeholder="Leave a note for Simon & Emma (optional)"></textarea>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false">
+              Where should I stay?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a"><p>We've reserved room blocks at Seda Nuvali (10 min away) and Hotel Dominique in Tagaytay (20 min). Mention "Emma & Simon Wedding" when booking for a discounted rate. Shuttle info will follow in your invitation.</p></div>
           </div>
-
-          <button type="submit" id="rsvp-submit">Send RSVP</button>
-          <div id="rsvp-msg" class="rsvp-msg" role="status" aria-live="polite"></div>
-        </form>
+          <div class="faq-item reveal">
+            <button class="faq-q" aria-expanded="false">
+              Will the ceremony be outdoors?
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="faq-a"><p>Yes — the ceremony is in the garden pavilion. A covered backup plan is ready in case of rain. We recommend bringing a light wrap for the evening breeze.</p></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -376,58 +431,51 @@
       </div>
     </section>
 
-    <section id="qa">
+    <section id="rsvp">
       <div class="wrap">
         <div class="section-head reveal">
-          <div class="eyebrow">Got Questions?</div>
-          <h2>Q&amp;A</h2>
-          <p>Everything you might want to know before the big day. Can't find your answer? Reach us at <a href="mailto:hello@emmaandsimon.com" style="color:var(--autumn-deep);">hello@emmaandsimon.com</a>.</p>
+          <div class="eyebrow">Kindly Reply By October 01, 2026</div>
+          <h2>RSVP</h2>
+          <p>We can't wait to celebrate with you. Please let us know if you'll be joining us — and don't forget to mention any dietary requirements.</p>
         </div>
 
-        <div class="faq-list">
-          <div class="faq-item reveal" data-delay="1">
-            <button class="faq-q" aria-expanded="false">
-              Can I bring a plus-one?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Your invitation indicates whether a plus-one is included. If you're unsure, please reach out to us directly — we'd love to accommodate where we can.</p></div>
+        <form id="rsvp-form" class="reveal-scale">
+          <input type="hidden" name="_subject" value="New Wedding RSVP Submission">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your email" required>
           </div>
-          <div class="faq-item reveal" data-delay="2">
-            <button class="faq-q" aria-expanded="false">
-              Are children welcome?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>We adore your little ones, but we've planned an adults-only celebration so everyone can relax and enjoy the evening. Nursing infants are absolutely welcome.</p></div>
+
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
           </div>
-          <div class="faq-item reveal" data-delay="3">
-            <button class="faq-q" aria-expanded="false">
-              Is there a gift registry?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Your presence is the greatest gift. If you'd like to give something, we've set up a honeymoon fund — details will be shared in your invitation packet. No boxed gifts, please.</p></div>
+
+          <div class="field">
+            <label>Will you be attending?</label>
+            <div class="radio-row">
+              <label class="radio-pill" id="pill-yes">
+                <input type="radio" name="attending" value="Joyfully accepts" required> Joyfully accepts
+              </label>
+              <label class="radio-pill" id="pill-no">
+                <input type="radio" name="attending" value="Regretfully declines" required> Regretfully declines
+              </label>
+            </div>
           </div>
-          <div class="faq-item reveal" data-delay="4">
-            <button class="faq-q" aria-expanded="false">
-              What about dietary restrictions?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Please note any allergies or dietary needs in your RSVP message. Our caterer offers vegetarian, vegan, and gluten-free options — just let us know in advance.</p></div>
+
+          <div class="field">
+            <label for="guests">Number of guests (including you)</label>
+            <input type="number" id="guests" name="guests" min="1" max="10" value="1" required>
           </div>
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              Where should I stay?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>We've reserved room blocks at Seda Nuvali (10 min away) and Hotel Dominique in Tagaytay (20 min). Mention "Emma & Simon Wedding" when booking for a discounted rate. Shuttle info will follow in your invitation.</p></div>
+
+          <div class="field">
+            <label for="message">Message or well-wishes</label>
+            <textarea id="message" name="message" placeholder="Leave a note for Simon & Emma (optional)"></textarea>
           </div>
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              Will the ceremony be outdoors?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Yes — the ceremony is in the garden pavilion. A covered backup plan is ready in case of rain. We recommend bringing a light wrap for the evening breeze.</p></div>
-          </div>
-        </div>
+
+          <button type="submit" id="rsvp-submit">Send RSVP</button>
+          <div id="rsvp-msg" class="rsvp-msg" role="status" aria-live="polite"></div>
+        </form>
       </div>
     </section>
 
@@ -445,50 +493,34 @@
       </div>
     </section>
 
-    <section id="photos">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Captured Moments</div>
-          <h2>Photos</h2>
-          <p>A glimpse of us — and the world we're building together. More photos will be added after the wedding!</p>
+    <!-- Find Your Table -->
+    <section id="table-finder" class="section">
+      <div class="container">
+        <div class="section-header">
+            <h2>Find Your Table</h2>
+            <p>
+                Begin typing your name below to locate your assigned table.
+            </p>
         </div>
 
-        <div class="photo-masonry" id="photo-grid">
-          <div class="photo-tile tall" data-delay="1">
-            <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2fcf?w=500&q=80" alt="Engagement portrait">
-            <div class="photo-cap">Engagement Session</div>
-          </div>
-          <div class="photo-tile square" data-delay="2">
-            <img src="https://images.unsplash.com/photo-1529636798458-92179e477f74?w=500&q=80" alt="Couple laughing">
-            <div class="photo-cap">Sunday Morning</div>
-          </div>
-          <div class="photo-tile wide" data-delay="3">
-            <img src="https://images.unsplash.com/photo-1520854221256-17451cc791c3?w=600&q=80" alt="Hands together">
-            <div class="photo-cap">Details</div>
-          </div>
-          <div class="photo-tile tall" data-delay="1">
-            <img src="https://images.unsplash.com/photo-1528892952291-009c663ce843?w=500&q=80" alt="Walking together">
-            <div class="photo-cap">City Stroll</div>
-          </div>
-          <div class="photo-tile square" data-delay="2">
-            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae24b?w=500&q=80" alt="Sunset moment">
-            <div class="photo-cap">Golden Hour</div>
-          </div>
-          <div class="photo-tile wide" data-delay="3">
-            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Garden setting">
-            <div class="photo-cap">The Venue</div>
-          </div>
-          <div class="photo-tile tall" data-delay="4">
-            <img src="https://images.unsplash.com/photo-1583939003609-6e45a02e64d8?w=500&q=80" alt="Ring detail">
-            <div class="photo-cap">The Ring</div>
-          </div>
-          <div class="photo-tile square" data-delay="2">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80" alt="Couple portrait">
-            <div class="photo-cap">Us</div>
-          </div>
+        <div class="table-search">
+            <input
+                id="search"
+                type="text"
+                autocomplete="off"
+                placeholder="Search your name..." />
+            <div id="suggestions"></div>
         </div>
+
+        <div id="loading">
+            Loading guest list...
+        </div>
+
+        <div id="result"></div>
+
       </div>
     </section>
+    
 
     <footer>
       <div class="display">Emma &amp; Simon</div>
@@ -499,7 +531,7 @@
 
 </main>
 
-
+<script src="js/seat.js" defer></script>
 <script src="js/Intro.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/main.js" defer></script>

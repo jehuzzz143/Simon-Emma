@@ -121,8 +121,10 @@ const intro = document.getElementById("intro");
 const website = document.getElementById("website");
 
 const openButton = document.getElementById("openInvitation");
+const seatFinder = document.getElementById("table-finder");
 
 let musicStarted = false;
+const targetSection = window.location.hash;
 
 function startMusic() {
   if (musicStarted) return;
@@ -136,6 +138,49 @@ function startMusic() {
       console.log("Autoplay blocked.", err);
     });
 }
+
+function skipIntro() {
+
+  opened = true;
+
+  clearInterval(leafInterval);
+
+  intro.classList.add("hide");
+
+  website.classList.add("show");
+
+  document.body.style.overflow = "auto";
+
+  const target = document.querySelector(targetSection);
+
+  if (target) {
+
+    setTimeout(() => {
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    }, 300);
+
+  }
+
+}
+
+// Skip intro when opening a direct section link
+if (targetSection) {
+
+  window.addEventListener("load", () => {
+
+    skipIntro();
+
+  });
+
+}else{
+  seatFinder.style.display = "none";
+}
+
 openButton.addEventListener("click", () => {
   this.isInvitationClicked = true;
   clearInterval(leafInterval);
@@ -159,3 +204,5 @@ musicButton.addEventListener("click", () => {
     console.log("Paused");
   }
 });
+
+
