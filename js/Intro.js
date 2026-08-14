@@ -95,7 +95,7 @@ seal.addEventListener("click", () => {
     clearInterval(leafInterval);
     intro.classList.add("hide");
     website.classList.add("show");
-    document.body.style.overflow = "auto";
+    document.body.style.overflowY = "auto";
 
     // Tiny delay guarantees the browser renders the website before animating the scroll
     setTimeout(() => {
@@ -149,7 +149,7 @@ function skipIntro() {
 
   website.classList.add("show");
 
-  document.body.style.overflow = "auto";
+  document.body.style.overflowY = "auto";
 
   const target = document.querySelector(targetSection);
 
@@ -188,21 +188,29 @@ openButton.addEventListener("click", () => {
 
   website.classList.add("show");
 
-  document.body.style.overflow = "auto";
+  document.body.style.overflowY = "auto";
 });
 
 const musicButton = document.getElementById("musicButton");
 
 musicButton.addEventListener("click", () => {
-  console.log("Music button clicked");
-
   if (bgMusic.paused) {
     bgMusic.play();
-    console.log("Playing");
   } else {
     bgMusic.pause();
-    console.log("Paused");
   }
+});
+
+bgMusic.addEventListener("play", () => {
+  musicButton.classList.add("playing");
+  musicButton.setAttribute("aria-label", "Pause music");
+  musicButton.setAttribute("aria-pressed", "true");
+});
+
+bgMusic.addEventListener("pause", () => {
+  musicButton.classList.remove("playing");
+  musicButton.setAttribute("aria-label", "Play music");
+  musicButton.setAttribute("aria-pressed", "false");
 });
 
 

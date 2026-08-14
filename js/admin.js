@@ -15,8 +15,16 @@ const els = {
     closeBtn: document.getElementById('close-create-btn'),
     cancelBtn: document.getElementById('cancel-create-btn'),
     createForm: document.getElementById('create-form'),
-    submitBtn: document.getElementById('submit-create-btn')
+    submitBtn: document.getElementById('submit-create-btn'),
+    paginationInfo: document.getElementById('pagination-info'),
+    paginationPages: document.getElementById('pagination-pages'),
+    prevPageBtn: document.getElementById('prev-page-btn'),
+    nextPageBtn: document.getElementById('next-page-btn')
 };
+
+const PAGE_SIZE = 20;
+let allRows = [];
+let currentPage = 1;
 
 function showStatus(message, type = 'ok') {
     els.status.textContent = message;
@@ -97,11 +105,40 @@ function renderRows(rows) {
                 ${!row.show_message ? 'disabled' : ''}>
                 Hide
             </button>
+            <button
+                class="btn danger small js-delete"
+                data-id="${row.id}"
+                data-name="${escapeHtml(row.name || 'this guest')}">
+                Delete
+            </button>
             </div>
         </td>
         </tr>
     `;
     }).join('');
+}
+
+function renderPagination() {
+    const totalPages = Math.max(1, Math.ceil(allRows.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const start = allRows.length ? (currentPage - 1) * PAGE_SIZE + 1 : 0;
+    const end = Math.min(currentPage * PAGE_SIZE, allRows.length);
+
+    els.paginationInfo.textContent = allRows.length
+    ? `Showing ${start}-${end} of ${allRows.length}`
+    : 'No RSVP records yet.';
+    els.paginationPages.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    els.prevPageBtn.disabled = currentPage <= 1;
+    els.nextPageBtn.disabled = currentPage >= totalPages;
+}
+
+function renderPage() {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const pageRows = allRows.slice(start, start + PAGE_SIZE);
+    renderRows(pageRows);
+    renderPagination();
 }
 
 async function loadRsvps() {
@@ -117,9 +154,9 @@ async function loadRsvps() {
     return;
     }
 
-    const rows = data || [];
-    updateStats(rows);
-    renderRows(rows);
+    allRows = data || [];
+    updateStats(allRows);
+    renderPage();
 }
 
 async function setMessageVisibility(id, shouldShow) {
@@ -141,6 +178,22 @@ async function setMessageVisibility(id, shouldShow) {
     shouldShow ? 'Message is now visible on the website.' : 'Message hidden from the website.',
     'ok'
     );
+    await loadRsvps();
+}
+
+async function deleteRsvp(id) {
+    const { error } = await supabaseClient
+    .from('rsvps')
+    .delete()
+    .eq('id', id);
+
+    if (error) {
+    console.error(error);
+    showStatus('Could not delete the RSVP row.', 'err');
+    return;
+    }
+
+    showStatus('RSVP record deleted.', 'ok');
     await loadRsvps();
 }
 
@@ -195,6 +248,30 @@ els.tbody.addEventListener('click', async (e) => {
     const hideBtn = e.target.closest('.js-hide');
     if (hideBtn && !hideBtn.disabled) {
     await setMessageVisibility(hideBtn.dataset.id, false);
+    return;
+    }
+
+    const deleteBtn = e.target.closest('.js-delete');
+    if (deleteBtn) {
+    const name = deleteBtn.dataset.name;
+    if (confirm(`Delete RSVP for ${name}? This cannot be undone.`)) {
+        await deleteRsvp(deleteBtn.dataset.id);
+    }
+    }
+});
+
+els.prevPageBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+    currentPage -= 1;
+    renderPage();
+    }
+});
+
+els.nextPageBtn.addEventListener('click', () => {
+    const totalPages = Math.max(1, Math.ceil(allRows.length / PAGE_SIZE));
+    if (currentPage < totalPages) {
+    currentPage += 1;
+    renderPage();
     }
 });
 

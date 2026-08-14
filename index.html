@@ -15,27 +15,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Emma & Simon — October 17, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/Intro.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="stylesheet" href="css/seat.css">
-
 <link rel="icon" type="image/png" href="https://www.svgrepo.com/show/398221/ring.svg">
-    <!-- Google Fonts -->
-
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="style.css">
 </head>
 <body>
 <!-- =======================================================
@@ -43,10 +29,18 @@
 ======================================================= -->
 <!-- Music -->
 
-<button id="musicButton"
-        aria-label="Music">
-    ♪
-</button>
+<div class="music-widget">
+    <button id="musicButton"
+            aria-label="Play music"
+            aria-pressed="false">
+        <span class="icon-note" aria-hidden="true">♪</span>
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="7" y="5" width="3.4" height="14" rx="1.2"></rect>
+            <rect x="13.6" y="5" width="3.4" height="14" rx="1.2"></rect>
+        </svg>
+    </button>
+    <span class="eq-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+</div>
 <section id="intro">
     <!-- Background -->
     <div id="paperTexture"></div>
@@ -66,13 +60,9 @@
     <!-- Heading -->
     <div class="introText">
         <p class="family">
-            Together with their families
+            Together with our families
         </p>
-        <h1>
-            Emma
-            <span>&</span>
-            Simon
-        </h1>
+
         <p class="invite">
             request the pleasure of your company
         </p>
@@ -140,15 +130,19 @@
 
     <nav id="topnav">
       <div class="brandmark">E &amp; S</div>
-      <div class="navlinks">
+      <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="navlinks" id="navlinks">
         <a href="#story">Our Story</a>
         <a href="#dress-code">Dress Code</a>
-        <a href="#qa" class="hide-xs">Q&amp;A</a>
+        <a href="#qa">Q&amp;A</a>
         <a href="#venue">Venue</a>
         <a href="#rsvp">RSVP</a>
         <a href="photos.html">Photos</a>
       </div>
     </nav>
+    <div class="nav-backdrop" id="navBackdrop"></div>
 
     <header id="hero">
       <div class="eyebrow">Together with their families</div>
@@ -191,8 +185,12 @@
               <p>He asked for her number. She said yes before he finished the sentence.</p>
             </div>
             <div class="frame reveal-right">
-              <img src="https://images.unsplash.com/photo-1522673606300-8d9631af9a2f?w=600&q=80" alt="Emma and Simon, early days" data-scroll-speed="0.15">
-              <div class="cap">The Beginning</div>
+              <div class="polaroid">
+                <div class="photo">
+                  <img src="https://images.unsplash.com/photo-1522673606300-8d9631af9a2f?w=600&q=80" alt="Emma and Simon, early days" data-scroll-speed="0.15">
+                </div>
+                <div class="cap">The Beginning</div>
+              </div>
             </div>
           </div>
 
@@ -204,8 +202,12 @@
               <p>That was the moment they knew this was the person they'd choose, again and again.</p>
             </div>
             <div class="frame reveal-left">
-              <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80" alt="Travel together" data-scroll-speed="0.12">
-              <div class="cap">Positano, Italy</div>
+              <div class="polaroid">
+                <div class="photo">
+                  <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80" alt="Travel together" data-scroll-speed="0.12">
+                </div>
+                <div class="cap">Positano, Italy</div>
+              </div>
             </div>
           </div>
 
@@ -217,8 +219,12 @@
               <p>She said yes. The whole restaurant cheered.</p>
             </div>
             <div class="frame reveal-right">
-              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="The proposal" data-scroll-speed="0.18">
-              <div class="cap">She Said Yes</div>
+              <div class="polaroid">
+                <div class="photo">
+                  <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="The proposal" data-scroll-speed="0.18">
+                </div>
+                <div class="cap">She Said Yes</div>
+              </div>
             </div>
           </div>
         </div>

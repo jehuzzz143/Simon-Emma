@@ -56,6 +56,7 @@ h1{margin:0 0 8px}
 .btn.secondary{background:var(--sage-soft);color:var(--sage)}
 .btn.small{padding:8px 12px;font-size:.9rem}
 .btn.hide{background:var(--hide-bg);color:var(--hide)}
+.btn.danger{background:var(--err-bg);color:var(--err)}
 .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
 .stats{
@@ -139,6 +140,23 @@ th{
     gap:8px;
     margin-top:8px;
 }
+
+.pagination{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    padding:16px 4px 4px;
+}
+.pagination-info{color:var(--muted);font-size:.9rem}
+.pagination-controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.pagination-controls button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+#pagination-pages{color:var(--text);font-weight:600;font-size:.9rem}
 
 .modal-backdrop{
     position:fixed;
