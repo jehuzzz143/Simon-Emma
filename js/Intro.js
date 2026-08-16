@@ -141,7 +141,7 @@ function startMusic() {
 
       const fadeIn = setInterval(() => {
         volume += 0.02;
-        bgMusic.volume = Math.max(volume, 0.50);
+        bgMusic.volume = Math.max(volume, .3);
 
         if (volume >= 1) {
           clearInterval(fadeIn);
