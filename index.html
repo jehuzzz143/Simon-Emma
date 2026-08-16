@@ -47,14 +47,54 @@
     <div id="particles"></div>
     <div id="leaves"></div>
     <div id="flowers">
-        <img
-            src="src/flower-top-left.svg"
-            class="flower flower-left"
-            alt="">
-        <img
-            src="src/flower-bottom-right.svg"
-            class="flower flower-right"
-            alt="">
+        <svg class="corner-sprig sprig-tl" viewBox="0 0 100 100" aria-hidden="true">
+            <path class="sprig-stem" d="M8,96 Q38,82 52,52 Q60,35 72,26"/>
+            <g class="sprig-leaf-group" transform="translate(28,78) rotate(-35)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <g class="sprig-leaf-group" transform="translate(48,56) rotate(25) scale(.85)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <path class="sprig-rose" transform="translate(48,-2) scale(.55)" d="M50,48 51,47.7 52,47.7 53,48.2 54,49.2 54.3,50.5 54.4,52.1 53.7,53.8 52.5,55.3 50.6,56.2 48.4,56.6 46.1,56.1 43.9,54.7 42.3,52.6 41.4,49.9 41.4,46.8 42.6,43.9 44.8,41.4 47.9,39.7 51.5,39.1 55.2,39.8 58.7,41.7 61.4,44.9 62.9,48.9 63,53.3 61.5,57.7 58.6,61.5 54.5,64.1 49.5,65.3 44.3,64.7 39.5,62.4 35.5,58.4 33.1,53.2 32.5,47.4 34,41.5 37.4,36.3 42.4,32.5 48.6,30.5 55.3,30.7 61.7,33.1 67,37.7"/>
+        </svg>
+        <svg class="corner-sprig sprig-tr" viewBox="0 0 100 100" aria-hidden="true">
+            <path class="sprig-stem" d="M8,96 Q38,82 52,52 Q60,35 72,26"/>
+            <g class="sprig-leaf-group" transform="translate(28,78) rotate(-35)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <g class="sprig-leaf-group" transform="translate(48,56) rotate(25) scale(.85)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <path class="sprig-rose" transform="translate(48,-2) scale(.55)" d="M50,48 51,47.7 52,47.7 53,48.2 54,49.2 54.3,50.5 54.4,52.1 53.7,53.8 52.5,55.3 50.6,56.2 48.4,56.6 46.1,56.1 43.9,54.7 42.3,52.6 41.4,49.9 41.4,46.8 42.6,43.9 44.8,41.4 47.9,39.7 51.5,39.1 55.2,39.8 58.7,41.7 61.4,44.9 62.9,48.9 63,53.3 61.5,57.7 58.6,61.5 54.5,64.1 49.5,65.3 44.3,64.7 39.5,62.4 35.5,58.4 33.1,53.2 32.5,47.4 34,41.5 37.4,36.3 42.4,32.5 48.6,30.5 55.3,30.7 61.7,33.1 67,37.7"/>
+        </svg>
+        <svg class="corner-sprig sprig-bl" viewBox="0 0 100 100" aria-hidden="true">
+            <path class="sprig-stem" d="M8,96 Q38,82 52,52 Q60,35 72,26"/>
+            <g class="sprig-leaf-group" transform="translate(28,78) rotate(-35)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <g class="sprig-leaf-group" transform="translate(48,56) rotate(25) scale(.85)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <path class="sprig-rose" transform="translate(48,-2) scale(.55)" d="M50,48 51,47.7 52,47.7 53,48.2 54,49.2 54.3,50.5 54.4,52.1 53.7,53.8 52.5,55.3 50.6,56.2 48.4,56.6 46.1,56.1 43.9,54.7 42.3,52.6 41.4,49.9 41.4,46.8 42.6,43.9 44.8,41.4 47.9,39.7 51.5,39.1 55.2,39.8 58.7,41.7 61.4,44.9 62.9,48.9 63,53.3 61.5,57.7 58.6,61.5 54.5,64.1 49.5,65.3 44.3,64.7 39.5,62.4 35.5,58.4 33.1,53.2 32.5,47.4 34,41.5 37.4,36.3 42.4,32.5 48.6,30.5 55.3,30.7 61.7,33.1 67,37.7"/>
+        </svg>
+        <svg class="corner-sprig sprig-br" viewBox="0 0 100 100" aria-hidden="true">
+            <path class="sprig-stem" d="M8,96 Q38,82 52,52 Q60,35 72,26"/>
+            <g class="sprig-leaf-group" transform="translate(28,78) rotate(-35)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <g class="sprig-leaf-group" transform="translate(48,56) rotate(25) scale(.85)">
+                <path class="sprig-leaf" d="M0,-9 C6,-6 6,6 0,9 C-6,6 -6,-6 0,-9"/>
+                <line class="sprig-vein" x1="0" y1="-7" x2="0" y2="7"/>
+            </g>
+            <path class="sprig-rose" transform="translate(48,-2) scale(.55)" d="M50,48 51,47.7 52,47.7 53,48.2 54,49.2 54.3,50.5 54.4,52.1 53.7,53.8 52.5,55.3 50.6,56.2 48.4,56.6 46.1,56.1 43.9,54.7 42.3,52.6 41.4,49.9 41.4,46.8 42.6,43.9 44.8,41.4 47.9,39.7 51.5,39.1 55.2,39.8 58.7,41.7 61.4,44.9 62.9,48.9 63,53.3 61.5,57.7 58.6,61.5 54.5,64.1 49.5,65.3 44.3,64.7 39.5,62.4 35.5,58.4 33.1,53.2 32.5,47.4 34,41.5 37.4,36.3 42.4,32.5 48.6,30.5 55.3,30.7 61.7,33.1 67,37.7"/>
+        </svg>
     </div>
 
     <!-- Heading -->
@@ -64,7 +104,7 @@
         </p>
 
         <p class="invite">
-            request the pleasure of your company
+            we request the pleasure of your company
         </p>
     </div>
 
@@ -81,7 +121,7 @@
                       Wedding Invitation
                   </p>
                   <h2>
-                      Emma & Simon
+                      Emma <span class="amp">&amp;</span> Simon
                   </h2>
                   <div class="gold-divider"></div>
                   <p>
@@ -146,7 +186,7 @@
 
     <header id="hero">
       <div class="eyebrow">Together with their families</div>
-      <h1>Simon <span class="amp">&amp;</span> Emma</h1>
+      <h1><span class="name name-left">Simon</span> <span class="amp">&amp;</span> <span class="name name-right">Emma</span></h1>
       <div class="date"> SAVE THE DATE &nbsp;·&nbsp; OCTOBER 17, 2026</div>
 
       <div id="countdown" aria-label="Countdown to the wedding">
@@ -231,7 +271,24 @@
       </div>
     </section>
 
+    <section id="video">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Watch Our Story</div>
+          <h2>Wedding Film</h2>
+          <p>Our highlight video will live right here — check back closer to the big day.</p>
+        </div>
 
+        <div class="video-frame reveal-scale">
+          <div class="video-placeholder">
+            <span class="video-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="video-note">Video coming soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="photos">
       <div class="wrap">
@@ -416,10 +473,10 @@
 
               <div class="venue-photos">
                 <div class="frame">
-                  <img src="https://scontent.fmnl17-4.fna.fbcdn.net/v/t39.30808-6/470141486_122115987242590600_4972068514832140127_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x853&ctp=s1280x853&_nc_cat=108&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFHHEyE9t4u2Awl1kk-fuBrMeWRR9f33dIx5ZFH1_fd0myELkP94-wxeXVwZKe53L9wk0XsXlrOP24DE61y5MUQ&_nc_ohc=O0-XovfiP2cQ7kNvwF7bUoL&_nc_oc=AdqOuQcoYo9FLJSFzBHyHnOWaA0zw8ruZ2qDwJLX-61N6--JFEfwhkjyTKGgW60mrU8&_nc_zt=23&_nc_ht=scontent.fmnl17-4.fna&_nc_gid=DOcetVMakQmlgmg1yKRHmg&_nc_ss=7b2a8&oh=00_AQB7hoq13CSqLl7acoxu5-9XUdwZiBKWo7pcSSbrDmpn2A&oe=6A559C5E" alt="Garden venue" data-scroll-speed="0.1">
+                  <img src="src/venue-one.jpg" alt="Garden venue" data-scroll-speed="0.1">
                 </div>
                 <div class="frame">
-                  <img src="https://scontent.fmnl17-7.fna.fbcdn.net/v/t39.30808-6/469648370_122115985142590600_2014475757904554255_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x853&ctp=s1280x853&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGr3S3Bo3NRYMru7mzgX7C--9T_DNnkqJj71P8M2eSomEn2BZIBJRB6aVLFN3dGH8OcqYd_sERBgL0w4BU7Qmue&_nc_ohc=D4ymcdCQYS0Q7kNvwFtok91&_nc_oc=Ado8Gar4GlYRq-Wdn2qB4taLbUq_TB3bXjG5ST4Wz26_N7iAwvZ1BqKseDhpevRxgyM&_nc_zt=23&_nc_ht=scontent.fmnl17-7.fna&_nc_gid=8X5YkYRr6gI1MqfTMIVnMg&_nc_ss=7b2a8&oh=00_AQD6_O1aTIE4cDF9uUhusA3Q_ytMC61B2RByZpAMEaCikg&oe=6A557FB7" alt="Outdoor reception" data-scroll-speed="0.14">
+                  <img src="src/venue-two.jpg" alt="Outdoor reception" data-scroll-speed="0.14">
                 </div>
               </div>
             </div>
@@ -427,7 +484,7 @@
 
           <div class="reveal-right">
             <div class="vanue-icon-container">
-              <img class="venue-icon-container-img" src="https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/465371224_8869968503025952_5637950831311001182_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x2048&ctp=s2048x2048&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEmm8eA_BLlsqgqsPfeDUJGrRY8mymb426tFjybKZvjbjmGjKG-KXKJy-hxj-n_Vauhj8rE87gRW4SjxgyPQ0fY&_nc_ohc=fQiFhTwfGp4Q7kNvwEmR2Qe&_nc_oc=Adoq3IZ-LS9q8AJbkZNUjBiNPIOmRXJuQio3piRlAi2lP5fYmhXEj4Tpe7fzNWGVOEA&_nc_zt=23&_nc_ht=scontent.fmnl17-3.fna&_nc_gid=dskApSl_wQoQu79BjXDACA&_nc_ss=7b2a8&oh=00_AQD-gURAL3ockJxnVtbprxCYLqDfTFIXCzT4MIdsv26FWA&oe=6A558FED" alt="Venue">
+              <img class="venue-icon-container-img" src="src/venue-icon.jpg" alt="Venue">
             </div>
             <div class="map-embed">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37418.42316138588!2d120.98522373510892!3d14.22590258454535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd7ff6e71abdab%3A0x540fe3c917b9a393!2sCasa%20Florencia%20Resort%20and%20Events%20Place!5e0!3m2!1sen!2sph!4v1783610948684!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>

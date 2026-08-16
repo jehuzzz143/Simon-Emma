@@ -211,16 +211,63 @@ overflow: hidden;
         background-attachment: scroll;
     }
 }
-  #hero .eyebrow{ opacity:0; animation:fadeUp .9s ease .2s forwards; }
+  #hero .eyebrow{ opacity:0; }
+  #website.show #hero .eyebrow{ animation:fadeUp .9s ease .2s forwards; }
   #hero h1{
     font-size:clamp(3rem, 9vw, 7.4rem); line-height:.98;
-    margin:18px 0 8px; opacity:0; animation:fadeUp 1s ease .4s forwards;
+    margin:18px 0 8px;
   }
-  #hero .amp{ color:var(--autumn-gold); font-style:italic; padding:0 .12em; }
+  #hero h1 .name{
+    display:inline-block;
+    opacity:0;
+  }
+#website.show #hero h1 .name-left {
+  animation: nameInLeft 2.8s cubic-bezier(.16, .8, .24, 1) .4s forwards;
+}
+
+#website.show #hero h1 .name-right {
+  animation: nameInRight 2.8s cubic-bezier(.16, .8, .24, 1) .4s forwards;
+}
+
+@keyframes nameInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-8vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes nameInRight {
+  from {
+    opacity: 0;
+    transform: translateX(8vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+  #hero .amp{
+    display:inline-block;
+    color:var(--autumn-gold); font-style:italic; padding:0 .12em;
+    opacity:0; transform:scale(.4);
+  }
+  #website.show #hero .amp{
+    animation:ampPop .5s cubic-bezier(.2,1.4,.4,1) 1.15s forwards;
+  }
+  @keyframes ampPop{
+    from{ opacity:0; transform:scale(.4); }
+    60%{ opacity:1; transform:scale(1.15); }
+    to{ opacity:1; transform:scale(1); }
+  }
   #hero .date{
     font-size:1.5rem; letter-spacing:.1em; margin-top:6px;
-    color:var(--autumn-rust); opacity:0; animation:fadeUp 1s ease .6s forwards;
+    color:var(--autumn-rust); opacity:0;
   }
+  #website.show #hero .date{ animation:fadeUp 1s ease .6s forwards; }
   /* Mobile */
   @media (max-width: 768px) {
     #hero .date{
@@ -231,8 +278,9 @@ overflow: hidden;
 
   #countdown{
     display:flex; gap:28px; margin-top:52px;
-    opacity:0; animation:fadeUp 1s ease .8s forwards;
+    opacity:0;
   }
+  #website.show #countdown{ animation:fadeUp 1s ease .8s forwards; }
   .count-cell{ display:flex; flex-direction:column; align-items:center; min-width:64px; }
   .count-num{ font-family:'Cormorant Garamond', serif; font-size:2.4rem; color:var(--autumn-deep); }
   .count-label{ font-size:.68rem; text-transform:uppercase; letter-spacing:.18em; opacity:.65; margin-top:2px; }
@@ -388,6 +436,41 @@ overflow: hidden;
     color:var(--autumn-rust);
   }
   .frame .fallback svg{ width:34px; height:34px; opacity:.6; }
+
+  /* ---------- video ---------- */
+  #video{ background:var(--autumn-cream); }
+  .video-frame{
+    max-width:900px; margin:0 auto;
+    aspect-ratio:16/9; border-radius:18px; overflow:hidden;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(196,149,106,.35) 0%, transparent 55%),
+      linear-gradient(150deg, var(--autumn-deep), #2d1c0e);
+    box-shadow:0 30px 60px -28px rgba(51,24,10,.5);
+  }
+  .video-placeholder{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+  }
+  .video-play{
+    display:flex; align-items:center; justify-content:center;
+    width:84px; height:84px; border-radius:50%;
+    background:rgba(255,255,255,.14);
+    border:1.5px solid rgba(255,255,255,.4);
+    backdrop-filter:blur(6px);
+    transition:transform .3s ease, background .3s ease;
+  }
+  .video-frame:hover .video-play{ transform:scale(1.08); background:rgba(255,255,255,.2); }
+  .video-play svg{ width:28px; height:28px; fill:#fff; margin-left:4px; }
+  .video-note{
+    font-size:.72rem; text-transform:uppercase; letter-spacing:.22em;
+    color:var(--autumn-cream); opacity:.75;
+  }
+  @media (max-width:520px){
+    .video-frame{ border-radius:12px; }
+    .video-play{ width:64px; height:64px; }
+    .video-play svg{ width:22px; height:22px; }
+  }
 
   /* ---------- dress code ---------- */
   #dress-code{ background:var(--autumn-cream); }

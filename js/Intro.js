@@ -129,10 +129,24 @@ const targetSection = window.location.hash;
 function startMusic() {
   if (musicStarted) return;
 
+  bgMusic.currentTime = 35;
+  bgMusic.volume = 0;
+
   bgMusic
     .play()
     .then(() => {
       musicStarted = true;
+
+      let volume = 0;
+
+      const fadeIn = setInterval(() => {
+        volume += 0.02;
+        bgMusic.volume = Math.max(volume, 0.50);
+
+        if (volume >= 1) {
+          clearInterval(fadeIn);
+        }
+      }, 200);
     })
     .catch((err) => {
       console.log("Autoplay blocked.", err);
