@@ -189,16 +189,10 @@ overflow: hidden;
 background-attachment: fixed;
   }
 
-  /* Desktop */
-@media (min-width: 769px) {
-    #yourSection {
-        background-attachment: fixed;
-    }
-}
-
-/* Mobile */
+  /* Mobile: iOS Safari doesn't render background-attachment:fixed reliably
+     (the image silently fails to paint), so scroll it there instead. */
 @media (max-width: 768px) {
-    #yourSection {
+    #hero {
         background-attachment: scroll;
     }
 }
