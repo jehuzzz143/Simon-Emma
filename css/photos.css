@@ -162,3 +162,53 @@ width:44px; height:44px; border-radius:50%; font-size:1.6rem;
 @media (prefers-reduced-motion: reduce){
 *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
 }
+
+/* ---------- music widget ---------- */
+.music-widget{
+position:fixed; right:20px; bottom:20px; z-index:100;
+display:flex; align-items:center; gap:10px;
+}
+#musicButton{
+position:relative; width:54px; height:54px; border:none; border-radius:50%;
+background:#fff; font-size:22px; cursor:pointer;
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+display:flex; align-items:center; justify-content:center;
+transition:.35s;
+}
+#musicButton:hover{
+transform:scale(1.12);
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+#musicButton .icon-note, #musicButton .icon-pause{
+position:absolute; top:50%; left:50%;
+transform:translate(-50%,-50%) scale(1);
+opacity:1; transition:opacity .25s ease, transform .25s ease;
+}
+#musicButton .icon-pause{
+width:18px; height:18px; fill:var(--ink);
+opacity:0; transform:translate(-50%,-50%) scale(.6);
+}
+#musicButton.playing .icon-note{ opacity:0; transform:translate(-50%,-50%) scale(.6); }
+#musicButton.playing .icon-pause{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+.eq-bars{
+display:flex; align-items:flex-end; gap:3px; height:18px; padding:8px 9px;
+border-radius:14px; box-shadow:0 15px 35px rgba(0,0,0,.12);
+opacity:0; transform:scale(.85); pointer-events:none;
+transition:opacity .25s ease, transform .25s ease;
+}
+#musicButton.playing + .eq-bars{ opacity:1; transform:scale(1); pointer-events:auto; }
+.eq-bars span{
+display:block; width:3px; border-radius:2px; background:#7E9A81;
+animation:eqBounce 1s ease-in-out infinite;
+}
+.eq-bars span:nth-child(1){ height:8px; animation-delay:-0.4s; }
+.eq-bars span:nth-child(2){ height:16px; animation-delay:-0.2s; }
+.eq-bars span:nth-child(3){ height:6px; animation-delay:0s; }
+@keyframes eqBounce{
+0%, 100%{ transform:scaleY(.35); }
+50%{ transform:scaleY(1); }
+}
+@media (max-width:520px){
+.music-widget{ right:15px; bottom:15px; }
+#musicButton{ width:48px; height:48px; font-size:18px; }
+}

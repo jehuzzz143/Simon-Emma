@@ -129,7 +129,13 @@ const targetSection = window.location.hash;
 function startMusic() {
   if (musicStarted) return;
 
-  bgMusic.currentTime = 35;
+  // music.js may have already resumed playback (e.g. the visitor came
+  // back from photos.html with music still going) — don't reset it
+  if (!bgMusic.paused) {
+    musicStarted = true;
+    return;
+  }
+
   bgMusic.volume = 0;
 
   bgMusic
@@ -141,7 +147,7 @@ function startMusic() {
 
       const fadeIn = setInterval(() => {
         volume += 0.02;
-        bgMusic.volume = Math.max(volume, .3);
+        bgMusic.volume = Math.min(Math.max(volume, .3), 1);
 
         if (volume >= 1) {
           clearInterval(fadeIn);
@@ -205,26 +211,7 @@ openButton.addEventListener("click", () => {
   document.body.style.overflowY = "auto";
 });
 
-const musicButton = document.getElementById("musicButton");
-
-musicButton.addEventListener("click", () => {
-  if (bgMusic.paused) {
-    bgMusic.play();
-  } else {
-    bgMusic.pause();
-  }
-});
-
-bgMusic.addEventListener("play", () => {
-  musicButton.classList.add("playing");
-  musicButton.setAttribute("aria-label", "Pause music");
-  musicButton.setAttribute("aria-pressed", "true");
-});
-
-bgMusic.addEventListener("pause", () => {
-  musicButton.classList.remove("playing");
-  musicButton.setAttribute("aria-label", "Play music");
-  musicButton.setAttribute("aria-pressed", "false");
-});
+// musicButton play/pause wiring + cross-page state persistence
+// now lives in js/music.js (loaded before this script)
 
 

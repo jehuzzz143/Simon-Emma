@@ -10,6 +10,22 @@
 </head>
 <body>
 
+<div class="music-widget">
+    <button id="musicButton"
+            aria-label="Play music"
+            aria-pressed="false">
+        <span class="icon-note" aria-hidden="true">♪</span>
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="7" y="5" width="3.4" height="14" rx="1.2"></rect>
+            <rect x="13.6" y="5" width="3.4" height="14" rx="1.2"></rect>
+        </svg>
+    </button>
+    <span class="eq-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+</div>
+<audio id="bgMusic" loop preload="auto">
+    <source src="src/piano.mp3" type="audio/mpeg">
+</audio>
+
 <svg class="floral-corner tl" viewBox="0 0 100 100" fill="none" aria-hidden="true">
   <path d="M50 10 C35 25, 20 35, 10 50 C20 40, 35 30, 50 20 C65 30, 80 40, 90 50 C80 35, 65 25, 50 10Z" fill="#C4652E" opacity=".6"/>
   <circle cx="50" cy="50" r="8" fill="#A0522D"/>
@@ -240,8 +256,8 @@
 </div>
 
 <footer>
-  <div class="display">Emma &amp; Simon</div>
-  <p>DECEMBER 20, 2026 &nbsp;·&nbsp; WITH LOVE AND GRATITUDE</p>
+  <div class="display">Simon &amp; Emma</div>
+  <p>October 17, 2026 &nbsp;·&nbsp; WITH LOVE AND GRATITUDE</p>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -254,6 +270,7 @@
   </div>
 </div>
 
+<script src="js/music.js"></script>
 <script>
   const tiles = [...document.querySelectorAll('.photo-tile')];
   const lightbox = document.getElementById('lightbox');
