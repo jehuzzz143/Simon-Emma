@@ -66,6 +66,53 @@
     if (document.visibilityState === "hidden") saveState();
   });
 
+  // pause background music while the story video plays, resume once
+  // it's paused/ended — but only if the music was actually playing.
+  // both directions fade instead of cutting sharply.
+  const storyVideo = document.querySelector(".story-video");
+  if (storyVideo) {
+    const FADE_MS = 600;
+    let fadeTimer = null;
+
+    function fadeVolume(target, onComplete) {
+      clearInterval(fadeTimer);
+      const start = bgMusic.volume;
+      const startTime = performance.now();
+      fadeTimer = setInterval(() => {
+        const progress = Math.min((performance.now() - startTime) / FADE_MS, 1);
+        bgMusic.volume = start + (target - start) * progress;
+        if (progress >= 1) {
+          clearInterval(fadeTimer);
+          fadeTimer = null;
+          if (onComplete) onComplete();
+        }
+      }, 40);
+    }
+
+    let resumeMusicAfterVideo = false;
+    let musicVolumeBeforeFade = bgMusic.volume || 1;
+
+    storyVideo.addEventListener("play", () => {
+      if (!bgMusic.paused) {
+        resumeMusicAfterVideo = true;
+        musicVolumeBeforeFade = bgMusic.volume || 1;
+        fadeVolume(0, () => bgMusic.pause());
+      }
+    });
+
+    const resumeMusicIfNeeded = () => {
+      if (resumeMusicAfterVideo) {
+        resumeMusicAfterVideo = false;
+        bgMusic.volume = 0;
+        bgMusic.play()
+          .then(() => fadeVolume(musicVolumeBeforeFade))
+          .catch(() => {});
+      }
+    };
+    storyVideo.addEventListener("pause", resumeMusicIfNeeded);
+    storyVideo.addEventListener("ended", resumeMusicIfNeeded);
+  }
+
   function applyInitialPosition() {
     const saved = readState();
     const targetTime = (saved && Number.isFinite(saved.time)) ? saved.time : DEFAULT_START_TIME;

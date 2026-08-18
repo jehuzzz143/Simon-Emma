@@ -447,28 +447,16 @@ overflow: hidden;
       linear-gradient(150deg, var(--autumn-deep), #2d1c0e);
     box-shadow:0 30px 60px -28px rgba(51,24,10,.5);
   }
-  .video-placeholder{
+  .story-video{
     position:absolute; inset:0;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+    width:100%; height:100%; object-fit:cover;
   }
-  .video-play{
-    display:flex; align-items:center; justify-content:center;
-    width:84px; height:84px; border-radius:50%;
-    background:rgba(255,255,255,.14);
-    border:1.5px solid rgba(255,255,255,.4);
-    backdrop-filter:blur(6px);
-    transition:transform .3s ease, background .3s ease;
-  }
-  .video-frame:hover .video-play{ transform:scale(1.08); background:rgba(255,255,255,.2); }
-  .video-play svg{ width:28px; height:28px; fill:#fff; margin-left:4px; }
-  .video-note{
-    font-size:.72rem; text-transform:uppercase; letter-spacing:.22em;
-    color:var(--autumn-cream); opacity:.75;
+  @media (max-width:768px){
+    #video .section-head{ margin-bottom:36px; }
   }
   @media (max-width:520px){
+    #video .wrap{ padding:0 20px; }
     .video-frame{ border-radius:12px; }
-    .video-play{ width:64px; height:64px; }
-    .video-play svg{ width:22px; height:22px; }
   }
 
   /* ---------- dress code ---------- */

@@ -121,7 +121,7 @@
                       Wedding Invitation
                   </p>
                   <h2>
-                      Emma <span class="amp">&amp;</span> Simon
+                      Simon <span class="amp">&amp;</span> Emma
                   </h2>
                   <div class="gold-divider"></div>
                   <p>
@@ -199,17 +199,23 @@
       <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
     </header>
 
-    <div id="takbo" class="video-section">
-      <video class="background-video" autoplay muted loop playsinline>
-        <source src="src/Takbo.mp4" type="video/mp4">
-      </video>
+    <section id="video" >
+      <div class="wrap">
+        <div class="section-head reveal">
+          
+          <h2>Moments to Cherish</h2>
+          <p>Relive our story with the video below.</p>
+        </div>
 
-      <div class="video-overlay"></div>
-
-      <div class="parallax-content ">
-        <p class="quote reveal" id="parallax-quote">We found home in each other, and we can’t wait to celebrate with you.</p>
+        <div class="video-frame reveal-scale">
+          <video class="story-video" controls playsinline poster="src/story-poster.png">
+            <source src="src/story.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-    </div>
+    </section>
+    
+    
     <!-- Parallax couple photo -->
     <section id="parallax-band" aria-label="Featured photo" class="hidden">
       <div class="parallax-bg" id="parallax-bg"></div>
@@ -291,24 +297,7 @@
 
       
     </section>
-    <section id="video" class="hidden">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div class="eyebrow">Watch Our Story</div>
-          <h2>Wedding Film</h2>
-          <p>Our highlight video will live right here — check back closer to the big day.</p>
-        </div>
-
-        <div class="video-frame reveal-scale">
-          <div class="video-placeholder">
-            <span class="video-play" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-            <span class="video-note">Video coming soon</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="photos">
       <div class="wrap">
@@ -671,6 +660,17 @@
       </div>
     </section>
     
+    <div id="takbo" class="video-section">
+      <video class="background-video" autoplay muted loop playsinline>
+        <source src="src/Takbo.mp4" type="video/mp4">
+      </video>
+
+      <div class="video-overlay"></div>
+
+      <div class="parallax-content ">
+        <p class="quote reveal" id="parallax-quote">We found home in each other, and we can’t wait to celebrate with you.</p>
+      </div>
+    </div>
 
     <footer>
       <div class="display">Emma &amp; Simon</div>
