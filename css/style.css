@@ -873,7 +873,18 @@ overflow: hidden;
 }
 #teaser{ min-height:600px; }
 @media (max-width:768px){
-  .video-section, #teaser{ min-height:30vh; }
+  .video-section, #teaser{ min-height:36vh; }
+  .parallax-content .quote {
+    margin-bottom: -10px;
+    font-size: 13px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.35;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+    max-width: 1000px;
+  }
 }
 
 .video-section .parallax-content{
