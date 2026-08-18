@@ -491,3 +491,5 @@ window.addEventListener('resize', () => {
     setGuestTrackPosition(marqueeState.currentTranslate);
   });
 });
+
+
