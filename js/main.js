@@ -492,4 +492,59 @@ window.addEventListener('resize', () => {
   });
 });
 
+// ---------- engagement carousel ----------
+(function initEngagementCarousel(){
+  const track = document.getElementById('engagement-track');
+  const dotsWrap = document.getElementById('engagement-dots');
+  if (!track || !dotsWrap) return;
+
+  const slides = [...track.querySelectorAll('.ecarousel-slide')];
+  const prevBtn = document.querySelector('.ecarousel-prev');
+  const nextBtn = document.querySelector('.ecarousel-next');
+
+  slides.forEach((slide, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'ecarousel-dot';
+    dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+    dot.addEventListener('click', () => {
+      slide.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+    });
+    dotsWrap.appendChild(dot);
+  });
+  const dots = [...dotsWrap.children];
+
+  const setActive = () => {
+    const trackRect = track.getBoundingClientRect();
+    const center = trackRect.left + trackRect.width / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    slides.forEach((slide, i) => {
+      const r = slide.getBoundingClientRect();
+      const dist = Math.abs((r.left + r.width / 2) - center);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    slides.forEach((s, i) => s.classList.toggle('is-active', i === closest));
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === closest));
+  };
+
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { setActive(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  const goTo = (dir) => {
+    const idx = slides.findIndex(s => s.classList.contains('is-active'));
+    const target = slides[Math.min(slides.length - 1, Math.max(0, idx + dir))];
+    target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+  };
+  prevBtn.addEventListener('click', () => goTo(-1));
+  nextBtn.addEventListener('click', () => goTo(1));
+
+  window.addEventListener('resize', () => requestAnimationFrame(setActive));
+  setActive();
+})();
+
 
