@@ -192,8 +192,8 @@ padding: 120px 24px 80px;
 background:
     radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.3) 0%, transparent 60%),
     linear-gradient(180deg, rgba(250,245,235,.65), rgba(245,236,220,.65)),
-    url("https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    center center / cover no-repeat;
+    url("../src/prenup/DSCF0680.JPG")
+    center 40% / cover no-repeat;
 background-attachment: fixed;
 overflow: hidden;
   }
@@ -863,13 +863,18 @@ overflow: hidden;
   }
 
 
-  .video-section {
+  .video-section, #teaser {
   position: relative;
   min-height: 700px;
+  padding: 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+}
+#teaser{ min-height:600px; }
+@media (max-width:768px){
+  .video-section, #teaser{ min-height:60vh; }
 }
 
 .video-section .parallax-content{
@@ -896,6 +901,12 @@ overflow: hidden;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  /* the source footage has ~12% solid black letterbox bars baked into
+     top/bottom of every frame; scaling up crops them out of view on
+     every screen size (they show fully on narrow/tall mobile boxes
+     since cover then has to reveal the video's whole vertical extent) */
+  transform: scale(1.4);
   z-index: 0;
 }
 
