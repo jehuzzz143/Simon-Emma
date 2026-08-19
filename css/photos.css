@@ -71,8 +71,7 @@ color:var(--autumn-rust); opacity:.85; transition:opacity .2s;
 .photo-masonry{
 columns:3; column-gap:18px;
 }
-@media (max-width:900px){ .photo-masonry{columns:2;} }
-@media (max-width:520px){ .photo-masonry{columns:1;} }
+
 
 .photo-tile{
 break-inside:avoid; margin-bottom:18px; border-radius:4px; overflow:hidden;

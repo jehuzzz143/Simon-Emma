@@ -94,6 +94,49 @@
   }, { threshold: 0.1 });
   photoTiles.forEach(el => photoIO.observe(el));
 
+  // ---------- photo lightbox ----------
+  const photoLightbox = document.getElementById('photos-lightbox');
+  if(photoLightbox){
+    const lbImg = document.getElementById('photos-lb-img');
+    const lbCaption = document.getElementById('photos-lb-caption');
+    const lbTiles = [...photoTiles];
+    let lbIndex = 0;
+
+    const showPhoto = (index) => {
+      lbIndex = (index + lbTiles.length) % lbTiles.length;
+      const tile = lbTiles[lbIndex];
+      const img = tile.querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCaption.textContent = tile.querySelector('.photo-cap')?.textContent || '';
+    };
+
+    const openPhotoLightbox = (index) => {
+      showPhoto(index);
+      photoLightbox.classList.add('open');
+      document.body.style.overflowY = 'hidden';
+    };
+
+    const closePhotoLightbox = () => {
+      photoLightbox.classList.remove('open');
+      document.body.style.overflowY = 'auto';
+      lbImg.src = '';
+    };
+
+    lbTiles.forEach((tile, i) => tile.addEventListener('click', () => openPhotoLightbox(i)));
+    document.getElementById('photos-lb-close').addEventListener('click', closePhotoLightbox);
+    document.getElementById('photos-lb-prev').addEventListener('click', e => { e.stopPropagation(); showPhoto(lbIndex - 1); });
+    document.getElementById('photos-lb-next').addEventListener('click', e => { e.stopPropagation(); showPhoto(lbIndex + 1); });
+    photoLightbox.addEventListener('click', e => { if(e.target === photoLightbox) closePhotoLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if(!photoLightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closePhotoLightbox();
+      if(e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
+      if(e.key === 'ArrowRight') showPhoto(lbIndex + 1);
+    });
+  }
+
   // ---------- parallax + scroll-driven movement ----------
   const parallaxBg = document.getElementById('parallax-bg');
   const scrollSpeedEls = document.querySelectorAll('[data-scroll-speed]');

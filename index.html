@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="css/Intro.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="stylesheet" href="css/seat.css">
+<link rel="stylesheet" href="css/photos.css">
 <link rel="icon" type="image/png" href="https://www.svgrepo.com/show/398221/ring.svg">
 </head>
 <body>
@@ -314,51 +315,72 @@
     <section id="photos">
       <div class="wrap">
         <div class="section-head reveal">
-          <div class="eyebrow">Captured Moments</div>
-          <h2>Prenup</h2>
-          <p>A glimpse of us — and the world we're building together. </p>
+          <div class="eyebrow">Moments before forever.</div>
+          <h2>The Prenup</h2>
+          
         </div>
 
         <div class="photo-masonry" id="photo-grid">
+
           <div class="photo-tile tall" data-delay="1">
             <img src="src/prenup/DSCF0089.JPG" alt="Simon and Emma prenup portrait">
             <div class="photo-cap">Just the Two of Us</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile square" data-delay="2">
             <img src="src/prenup/DSCF0270.JPG" alt="Simon and Emma laughing together">
             <div class="photo-cap">Laughing Together</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile wide" data-delay="3">
             <img src="src/prenup/XS109147.JPG" alt="Simon and Emma by the window">
             <div class="photo-cap">Quiet Mornings</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile tall" data-delay="1">
             <img src="src/prenup/DSCF0108.JPG" alt="Simon and Emma close together">
             <div class="photo-cap">Close to You</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile square" data-delay="2">
             <img src="src/prenup/DSCF0450.JPG" alt="Simon and Emma black and white portrait">
             <div class="photo-cap">In Every Glance</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile wide" data-delay="3">
             <img src="src/prenup/DSCF0240.JPG" alt="Simon and Emma holding childhood photos">
             <div class="photo-cap">Then &amp; Now</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile tall" data-delay="4">
             <img src="src/prenup/DSCF0334.JPG" alt="Simon and Emma back to back">
             <div class="photo-cap">Back to Back</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile square" data-delay="2">
             <img src="src/prenup/DSCF0387.JPG" alt="Simon and Emma with bouquet">
             <div class="photo-cap">With Love</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
           <div class="photo-tile wide" data-delay="1">
             <img src="src/prenup/DSCF0475.JPG" alt="Simon and Emma exchanging the ring">
             <div class="photo-cap">The Ring</div>
+            <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
         </div>
       </div>
+
     </section>
+
+    <div class="lightbox" id="photos-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <div class="lightbox-inner">
+        <button class="lightbox-close" id="photos-lb-close" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="photos-lb-prev" aria-label="Previous">&#8249;</button>
+        <img id="photos-lb-img" src="" alt="">
+        <button class="lightbox-nav lightbox-next" id="photos-lb-next" aria-label="Next">&#8250;</button>
+        <p class="lightbox-caption" id="photos-lb-caption"></p>
+      </div>
+    </div>
 
     <section id="engagement">
       <div class="wrap">
