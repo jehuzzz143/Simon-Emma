@@ -53,34 +53,6 @@
     stroke-linecap:round; opacity:.5;
   }
 
-  /* ---------- autumn florals ---------- */
-  .floral-deco{
-    position:absolute; pointer-events:none; z-index:0; opacity:.2;
-  }
-  .floral-deco.hero-tr{ top:90px; right:24px; width:120px; }
-  .floral-deco.hero-bl{ bottom:100px; left:24px; width:100px; transform:scaleX(-1); }
-  .section-floral{
-    position:absolute; width:80px; opacity:.12; pointer-events:none;
-  }
-  .section-floral.left{ left:16px; top:40px; }
-  .section-floral.right{ right:16px; bottom:40px; transform:rotate(180deg); }
-  .leaf-scatter{
-    position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0;
-  }
-  .leaf-scatter span{
-    position:absolute; font-size:1.4rem; opacity:.15;
-    animation:leafDrift 12s ease-in-out infinite;
-  }
-  .leaf-scatter span:nth-child(1){ top:12%; left:8%; animation-delay:0s; }
-  .leaf-scatter span:nth-child(2){ top:35%; right:10%; animation-delay:2s; font-size:1.1rem; }
-  .leaf-scatter span:nth-child(3){ bottom:25%; left:15%; animation-delay:4s; font-size:1.6rem; }
-  .leaf-scatter span:nth-child(4){ top:60%; right:6%; animation-delay:1s; }
-  .leaf-scatter span:nth-child(5){ bottom:10%; right:20%; animation-delay:3s; font-size:1.2rem; }
-  @keyframes leafDrift{
-    0%,100%{ transform:translateY(0) rotate(0deg); }
-    50%{ transform:translateY(-12px) rotate(8deg); }
-  }
-
   /* ---------- nav: see css/nav.css (shared with photos.html) ---------- */
 
   /* ---------- hero ---------- */
@@ -209,8 +181,7 @@ background-attachment: fixed;
     background:
       linear-gradient(to bottom, rgba(124,58,46,.3), rgba(92,51,23,.65)),
       url('https://images.unsplash.com/photo-1531257493908-7a951e5537e7?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
-      /*url('https://images.unsplash.com/photo-1736236345681-9b8d7793156a?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
-    */will-change:transform;
+    will-change:transform;
     opacity: 1;
   }
   .parallax-content{
@@ -330,13 +301,6 @@ background-attachment: fixed;
     width:100%; height:100%; object-fit:cover; display:block;
     will-change:transform;
   }
-  .frame .fallback{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
-    color:var(--autumn-rust);
-  }
-  .frame .fallback svg{ width:34px; height:34px; opacity:.6; }
-
   /* ---------- video ---------- */
   #video{ background:var(--autumn-cream); }
   .video-frame{
@@ -539,8 +503,6 @@ background-attachment: fixed;
   .photo-tile:hover{ box-shadow:0 18px 40px -14px rgba(51,54,46,.35); }
   .photo-tile img{ width:100%; display:block; object-fit:cover; }
   .photo-tile.tall img{ aspect-ratio:3/4; }
-  .photo-tile.wide img{ aspect-ratio:4/3; }
-  .photo-tile.square img{ aspect-ratio:1/1; }
   .photo-tile .photo-cap{
     position:absolute; bottom:0; left:0; right:0; padding:12px 14px;
     font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#fff;
@@ -869,13 +831,6 @@ background-attachment: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
   z-index: 1;
-}
-
-.section-content {
-  position: relative;
-  z-index: 2;
-  color: white;
-  text-align: center;
 }
 
 .hidden{

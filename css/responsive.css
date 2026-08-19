@@ -39,11 +39,6 @@
         font-size:24px;
     }
 
-    .flower-left,
-    .flower-right{
-        width:220px;
-    }
-
 }
 /* ==========================================================
    RESPONSIVE - MOBILE
@@ -87,24 +82,9 @@
         max-width:430px;
 
         margin-top:15px;
-        animation: envelopeFloatTablet 12s ease-in-out infinite;
         will-change: transform;
     transform: translateZ(0);
     }
-
-    /*
-    @keyframes envelopeFloatTablet{
-
-        0%,100%{
-            transform:translateY(0);
-        }
-
-        50%{
-            transform:translateY(-4px);
-        }
-
-    }
-        */
 
     .paper-content{
 
@@ -151,24 +131,6 @@
         font-size:13px;
 
         margin-top:20px;
-
-    }
-
-    .flower-left{
-
-        width:170px;
-
-        top:-40px;
-        left:-60px;
-
-    }
-
-    .flower-right{
-
-        width:170px;
-
-        top:-40px;
-        right:-60px;
 
     }
 
@@ -240,25 +202,10 @@
 
         width:94vw;
         max-width:350px;
-        animation: envelopeFloatMobile 12s ease-in-out infinite;
         will-change: transform;
-    transform: translateZ(0);       
+    transform: translateZ(0);
 
     }
-
-/*
-    @keyframes envelopeFloatMobile{
-
-        0%,100%{
-            transform:translateY(0);
-        }
-
-        50%{
-            transform:translateY(-4px);
-        }
-
-    }
-*/
 
 
 
@@ -290,18 +237,6 @@
         height:68px;
 
         font-size:18px;
-
-    }
-
-    .flower-left{
-
-        width:130px;
-
-    }
-
-    .flower-right{
-
-        width:130px;
 
     }
 

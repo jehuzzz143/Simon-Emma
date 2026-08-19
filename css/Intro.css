@@ -183,12 +183,6 @@ body {
 
 }
 
-.flower-right {
-    width: 280px;
-    top: -80px;
-    right: -80px;
-}
-
 .family {
 
     font-size: 24px;
@@ -769,52 +763,6 @@ body {
 
 #website {
     display: none;
-}
-
-/* ==========================================================
-   PART 3
-   FLOWER ANIMATION
-========================================================== */
-
-.flower {
-
-    position: absolute;
-    pointer-events: none;
-    user-select: none;
-    animation: flowerFloat 8s ease-in-out infinite;
-    will-change: transform;
-    transform: translateZ(0);
-
-}
-
-.flower-left {
-    width: 260px;
-    top: -70px;
-    left: -70px;
-}
-
-.flower-right {
-    width: 260px;
-    top: -70px;
-    right: -70px;
-    transform: scaleX(-1) !important;
-}
-
-
-@keyframes flowerFloat {
-
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(10px) rotate(2deg);
-    }
-
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
 }
 
 /* ==========================================================

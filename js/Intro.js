@@ -40,8 +40,6 @@ for (let i = 0; i < particleCount; i++) {
 const isMobile = window.matchMedia("(max-width: 768px)").matches;
 function createLeaf() {
   const leaf = document.createElement("img");
-  //const isMobile = window.matchMedia("(max-width: 768px)").matches;
-  //const isMobile = window.innerWidth <= 768;
   leaf.src = "src/leaf.svg";
 
   leaf.className = "leaf";
