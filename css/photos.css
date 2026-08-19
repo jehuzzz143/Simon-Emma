@@ -28,22 +28,7 @@ position:fixed; pointer-events:none; z-index:0; opacity:.18;
 .floral-corner.tl{ top:80px; left:12px; width:90px; }
 .floral-corner.br{ bottom:24px; right:12px; width:110px; transform:rotate(180deg); }
 
-#topnav{
-position:fixed; top:0; left:0; right:0; z-index:50;
-display:flex; align-items:center; justify-content:space-between;
-padding:14px 32px;
-background:rgba(245,237,224,.94);
-backdrop-filter:blur(8px);
-box-shadow:0 1px 0 rgba(92,51,23,.1);
-}
-.brandmark{font-family:'Cormorant Garamond', serif; font-size:1.3rem; letter-spacing:.05em;}
-.navlinks{display:flex; gap:22px; flex-wrap:wrap; justify-content:flex-end;}
-.navlinks a{
-font-size:.72rem; text-transform:uppercase; letter-spacing:.12em;
-opacity:.75; transition:opacity .2s, color .2s; white-space:nowrap;
-}
-.navlinks a:hover, .navlinks a.active{opacity:1; color:var(--autumn-rust);}
-@media (max-width:768px){ #topnav{padding:12px 16px;} .navlinks{gap:12px;} .navlinks a{font-size:.65rem;} }
+/* nav: see css/nav.css (shared with index.html) */
 
 .photos-page .page-hero{
 position:relative; z-index:2;

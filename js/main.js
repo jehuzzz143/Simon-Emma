@@ -25,36 +25,7 @@
   document.addEventListener('scroll', onScrollNav, { passive: true });
   onScrollNav();
 
-  // ---------- mobile nav drawer ----------
-  const navToggle = document.getElementById('navToggle');
-  const navPanel = document.getElementById('navlinks');
-  const navBackdrop = document.getElementById('navBackdrop');
-
-  const closeNavDrawer = () => {
-    navPanel.classList.remove('open');
-    navToggle.classList.remove('open');
-    navBackdrop.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflowY = 'auto';
-  };
-
-  const openNavDrawer = () => {
-    navPanel.classList.add('open');
-    navToggle.classList.add('open');
-    navBackdrop.classList.add('open');
-    navToggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflowY = 'hidden';
-  };
-
-  navToggle.addEventListener('click', () => {
-    if(navPanel.classList.contains('open')) closeNavDrawer();
-    else openNavDrawer();
-  });
-  navBackdrop.addEventListener('click', closeNavDrawer);
-  navLinks.forEach(a => a.addEventListener('click', closeNavDrawer));
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeNavDrawer();
-  });
+  // ---------- mobile nav drawer: see js/nav.js (shared with photos.html) ----------
 
   // ---------- scroll reveal ----------
   const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');

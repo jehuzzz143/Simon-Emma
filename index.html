@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="css/responsive.css">
 <link rel="stylesheet" href="css/seat.css">
 <link rel="stylesheet" href="css/photos.css">
+<link rel="stylesheet" href="css/nav.css">
 <link rel="icon" type="image/png" href="https://www.svgrepo.com/show/398221/ring.svg">
 </head>
 <body>
@@ -169,21 +170,8 @@
       </svg>
     </div>
 
-    <nav id="topnav">
-      <div class="brandmark">E &amp; S</div>
-      <button id="navToggle" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="navlinks" id="navlinks">
-        <a href="#story">Our Story</a>
-        <a href="#dress-code">Dress Code</a>
-        <a href="#qa">Q&amp;A</a>
-        <a href="#venue">Venue</a>
-        <a href="#rsvp">RSVP</a>
-        <a href="photos.html">Photos</a>
-      </div>
-    </nav>
-    <div class="nav-backdrop" id="navBackdrop"></div>
+    <div id="site-nav"></div>
+    <script src="js/nav.js"></script>
 
     <header id="hero">
       <div class="eyebrow">Together with our families</div>
@@ -322,12 +310,12 @@
 
         <div class="photo-masonry" id="photo-grid">
 
-          <div class="photo-tile square" data-delay="1">
+          <div class="photo-tile tall" data-delay="1">
             <img src="src/prenup-summary/1.JPG" alt="Emma holding a sunflower bouquet in her wedding gown">
             <div class="photo-cap">With Sunflowers</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile wide" data-delay="2">
+          <div class="photo-tile tall" data-delay="2">
             <img src="src/prenup-summary/2.JPG" alt="Emma seated in her veil holding a single flower">
             <div class="photo-cap">A Quiet Moment</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
@@ -337,12 +325,12 @@
             <div class="photo-cap">Looking Back</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile square" data-delay="1">
+          <div class="photo-tile tall" data-delay="1">
             <img src="src/prenup-summary/4.JPG" alt="Simon watching Emma from behind in black and white">
             <div class="photo-cap">Watching You</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile wide" data-delay="2">
+          <div class="photo-tile tall" data-delay="2">
             <img src="src/prenup-summary/5.JPG" alt="Simon and Emma seated back to back in black and white">
             <div class="photo-cap">Back to Back</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
@@ -352,12 +340,12 @@
             <div class="photo-cap">A Beam of Light</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile square" data-delay="4">
+          <div class="photo-tile tall" data-delay="4">
             <img src="src/prenup-summary/7.JPG" alt="Emma embracing Simon from behind while he holds their bouquet">
             <div class="photo-cap">Arms Around You</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile wide" data-delay="2">
+          <div class="photo-tile tall" data-delay="2">
             <img src="src/prenup-summary/8.JPG" alt="Simon and Emma holding their bouquet together, laughing">
             <div class="photo-cap">Hand in Hand</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
@@ -367,12 +355,12 @@
             <div class="photo-cap">Side by Side</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile square" data-delay="3">
+          <div class="photo-tile tall" data-delay="3">
             <img src="src/prenup-summary/11.JPG" alt="Simon leaning on a chair beside the bouquet, smiling">
             <div class="photo-cap">His Turn</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
           </div>
-          <div class="photo-tile wide" data-delay="2">
+          <div class="photo-tile tall" data-delay="2">
             <img src="src/prenup-summary/12.JPG" alt="Simon posing thoughtfully with his hand on his chin">
             <div class="photo-cap">Deep in Thought</div>
             <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></div>
