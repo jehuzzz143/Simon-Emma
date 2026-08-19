@@ -5,7 +5,7 @@
 ========================================================== */
 (function () {
   const STORAGE_KEY = "weddingMusicState";
-  const DEFAULT_START_TIME = 35;
+  const DEFAULT_START_TIME = 1;
 
   const bgMusic = document.getElementById("bgMusic");
   const musicButton = document.getElementById("musicButton");
