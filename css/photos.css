@@ -70,6 +70,7 @@ color:var(--autumn-rust); opacity:.85; transition:opacity .2s;
 .gallery-wrap{position:relative; z-index:2; padding:0 0 100px;}
 .photo-masonry{
 display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+align-items:start;
 }
 
 
