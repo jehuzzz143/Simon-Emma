@@ -45,35 +45,37 @@ opacity:.75; transition:opacity .2s, color .2s; white-space:nowrap;
 .navlinks a:hover, .navlinks a.active{opacity:1; color:var(--autumn-rust);}
 @media (max-width:768px){ #topnav{padding:12px 16px;} .navlinks{gap:12px;} .navlinks a{font-size:.65rem;} }
 
-.page-hero{
+.photos-page .page-hero{
 position:relative; z-index:2;
 text-align:center; padding:140px 24px 72px;
 background:
     radial-gradient(ellipse at 50% 0%, rgba(196,149,106,.25) 0%, transparent 65%),
     linear-gradient(180deg, var(--paper) 0%, var(--autumn-cream) 100%);
 }
-.page-hero .eyebrow{
+.photos-page .page-hero .eyebrow{
 font-size:.72rem; text-transform:uppercase; letter-spacing:.28em;
 color:var(--autumn-rust); font-weight:500;
 }
-.page-hero h1{font-size:clamp(2.4rem,6vw,3.6rem); margin-top:12px; color:var(--autumn-deep);}
-.page-hero p{max-width:520px; margin:16px auto 0; line-height:1.7; opacity:.8;}
-.back-link{
+.photos-page .page-hero h1{font-size:clamp(2.4rem,6vw,3.6rem); margin-top:12px; color:var(--autumn-deep);}
+.photos-page .page-hero p{max-width:520px; margin:16px auto 0; line-height:1.7; opacity:.8;}
+.photos-page .back-link{
 display:inline-flex; align-items:center; gap:8px; margin-top:28px;
 font-size:.75rem; text-transform:uppercase; letter-spacing:.14em;
 color:var(--autumn-rust); opacity:.85; transition:opacity .2s;
 }
-.back-link:hover{opacity:1;}
-.back-link svg{width:16px; height:16px;}
+.photos-page .back-link:hover{opacity:1;}
+.photos-page .back-link svg{width:16px; height:16px;}
 
-/* masonry */
-.gallery-wrap{position:relative; z-index:2; padding:0 0 100px;}
-.photo-masonry{
+/* masonry — scoped to .photos-page so it never leaks onto index.html,
+   which loads this stylesheet only for the shared music widget and
+   defines its own (incompatible) .photo-masonry/.photo-tile design */
+.photos-page .gallery-wrap{position:relative; z-index:2; padding:0 0 100px;}
+.photos-page .photo-masonry{
 display:grid; grid-template-columns:repeat(3, 1fr); grid-auto-rows:8px; gap:18px;
 }
 
 
-.photo-tile{
+.photos-page .photo-tile{
 border-radius:4px; overflow:hidden;
 position:relative; cursor:pointer;
 background:var(--autumn-blush);
@@ -81,38 +83,38 @@ box-shadow:0 10px 28px -16px rgba(92,51,23,.35);
 opacity:0; transform:translateY(24px);
 transition:opacity .65s ease, transform .65s ease, box-shadow .3s ease;
 }
-.photo-tile.is-visible{opacity:1; transform:translateY(0);}
-.photo-tile:hover{box-shadow:0 18px 40px -14px rgba(92,51,23,.4);}
-.photo-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s ease;}
-.photo-tile:hover img{transform:scale(1.03);}
-.photo-tile .photo-cap{
+.photos-page .photo-tile.is-visible{opacity:1; transform:translateY(0);}
+.photos-page .photo-tile:hover{box-shadow:0 18px 40px -14px rgba(92,51,23,.4);}
+.photos-page .photo-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s ease;}
+.photos-page .photo-tile:hover img{transform:scale(1.03);}
+.photos-page .photo-tile .photo-cap{
 position:absolute; bottom:0; left:0; right:0; padding:14px 16px;
 font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#fff;
 background:linear-gradient(0deg, rgba(92,51,23,.65), transparent);
 opacity:0; transform:translateY(6px);
 transition:opacity .3s ease, transform .3s ease;
 }
-.photo-tile:hover .photo-cap{opacity:1; transform:translateY(0);}
-.photo-tile .zoom-hint{
+.photos-page .photo-tile:hover .photo-cap{opacity:1; transform:translateY(0);}
+.photos-page .photo-tile .zoom-hint{
 position:absolute; top:12px; right:12px;
 width:32px; height:32px; border-radius:50%;
 background:rgba(255,250,244,.88); color:var(--autumn-deep);
 display:flex; align-items:center; justify-content:center;
 opacity:0; transition:opacity .25s ease;
 }
-.photo-tile:hover .zoom-hint{opacity:1;}
-.photo-tile .zoom-hint svg{width:14px; height:14px;}
+.photos-page .photo-tile:hover .zoom-hint{opacity:1;}
+.photos-page .photo-tile .zoom-hint svg{width:14px; height:14px;}
 
-footer{
+.photos-page footer{
 position:relative; z-index:2;
 padding:48px 24px 40px; text-align:center;
 background:var(--paper); border-top:1px solid rgba(196,149,106,.3);
 }
-footer .display{font-size:1.5rem; color:var(--autumn-deep);}
-footer p{font-size:.8rem; opacity:.55; margin-top:10px; letter-spacing:.04em;}
+.photos-page footer .display{font-size:1.5rem; color:var(--autumn-deep);}
+.photos-page footer p{font-size:.8rem; opacity:.55; margin-top:10px; letter-spacing:.04em;}
 
-/* lightbox */
-.lightbox{
+/* lightbox — also scoped, see note above (index.html has its own) */
+.photos-page .lightbox{
 position:fixed; inset:0; z-index:200;
 background:rgba(61,41,20,.92);
 display:flex; align-items:center; justify-content:center;
@@ -120,42 +122,42 @@ opacity:0; visibility:hidden;
 transition:opacity .35s ease, visibility .35s ease;
 padding:24px;
 }
-.lightbox.open{opacity:1; visibility:visible;}
-.lightbox-inner{
+.photos-page .lightbox.open{opacity:1; visibility:visible;}
+.photos-page .lightbox-inner{
 position:relative; max-width:min(92vw, 1100px); max-height:90vh;
 display:flex; flex-direction:column; align-items:center;
 transform:scale(.92); transition:transform .35s ease;
 }
-.lightbox.open .lightbox-inner{transform:scale(1);}
-.lightbox img{
+.photos-page .lightbox.open .lightbox-inner{transform:scale(1);}
+.photos-page .lightbox img{
 max-width:100%; max-height:78vh; object-fit:contain;
 border-radius:3px; box-shadow:0 24px 60px rgba(0,0,0,.45);
 }
-.lightbox-caption{
+.photos-page .lightbox-caption{
 margin-top:14px; color:var(--autumn-cream); font-size:.82rem;
 letter-spacing:.12em; text-transform:uppercase; text-align:center;
 }
-.lightbox-close, .lightbox-nav{
+.photos-page .lightbox-close, .photos-page .lightbox-nav{
 position:absolute; background:rgba(245,237,224,.15);
 border:1px solid rgba(245,237,224,.25); color:var(--autumn-cream);
 cursor:pointer; transition:background .2s;
 display:flex; align-items:center; justify-content:center;
 }
-.lightbox-close:hover, .lightbox-nav:hover{background:rgba(245,237,224,.28);}
-.lightbox-close{
+.photos-page .lightbox-close:hover, .photos-page .lightbox-nav:hover{background:rgba(245,237,224,.28);}
+.photos-page .lightbox-close{
 top:-48px; right:0; width:40px; height:40px; border-radius:50%;
 font-size:1.4rem; line-height:1;
 }
-.lightbox-nav{
+.photos-page .lightbox-nav{
 top:50%; transform:translateY(-50%);
 width:44px; height:44px; border-radius:50%; font-size:1.6rem;
 }
-.lightbox-prev{left:-56px;}
-.lightbox-next{right:-56px;}
+.photos-page .lightbox-prev{left:-56px;}
+.photos-page .lightbox-next{right:-56px;}
 @media (max-width:640px){
-.lightbox-prev{left:8px; top:auto; bottom:-52px; transform:none;}
-.lightbox-next{right:8px; top:auto; bottom:-52px; transform:none;}
-.lightbox-close{top:12px; right:12px;}
+.photos-page .lightbox-prev{left:8px; top:auto; bottom:-52px; transform:none;}
+.photos-page .lightbox-next{right:8px; top:auto; bottom:-52px; transform:none;}
+.photos-page .lightbox-close{top:12px; right:12px;}
 }
 
 @media (prefers-reduced-motion: reduce){
