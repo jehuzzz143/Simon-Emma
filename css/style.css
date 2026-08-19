@@ -610,11 +610,11 @@ background-attachment: fixed;
   /* ---------- photos ---------- */
   #photos{ background:var(--paper); }
   .photo-masonry{
-    columns:3; column-gap:18px;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
   }
 
   .photo-tile{
-    break-inside:avoid; margin-bottom:18px; border-radius:3px; overflow:hidden;
+    border-radius:3px; overflow:hidden;
     position:relative; background:var(--autumn-blush); cursor:pointer;
     box-shadow:0 10px 28px -16px rgba(51,54,46,.3);
     opacity:0; transform:translateY(32px) scale(.96);
