@@ -2,14 +2,17 @@
    BACKGROUND MUSIC — persists play/pause + position across
    page navigations (index.html <-> photos.html) via
    sessionStorage, since each page load is a fresh document.
-========================================================== */
-(function () {
-  const STORAGE_KEY = "weddingMusicState";
-  const DEFAULT_START_TIME = 1;
 
-  const bgMusic = document.getElementById("bgMusic");
+   The actual player (YouTube-backed or the local fallback file)
+   is resolved by js/bg-music.js; this file only drives it.
+========================================================== */
+(async function () {
+  const STORAGE_KEY = "weddingMusicState";
+
   const musicButton = document.getElementById("musicButton");
-  if (!bgMusic || !musicButton) return;
+  if (!musicButton || !window.bgMusicReady) return;
+  const bgMusic = await window.bgMusicReady;
+  if (!bgMusic) return;
 
   function readState() {
     try {
@@ -115,7 +118,8 @@
 
   function applyInitialPosition() {
     const saved = readState();
-    const targetTime = (saved && Number.isFinite(saved.time)) ? saved.time : DEFAULT_START_TIME;
+    const fallbackStart = bgMusic.defaultStartTime ?? 0;
+    const targetTime = (saved && Number.isFinite(saved.time)) ? saved.time : fallbackStart;
     // guard against a saved position past the track's actual length
     bgMusic.currentTime = (bgMusic.duration && targetTime >= bgMusic.duration) ? 0 : targetTime;
 

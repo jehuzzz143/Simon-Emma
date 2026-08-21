@@ -36,6 +36,29 @@
 
     <div id="page-status" class="status" role="status" aria-live="polite"></div>
 
+    <div class="card panel">
+      <strong>Background Music</strong>
+      <p class="sub" style="margin:4px 0 16px;">Paste a YouTube link to use as the site's background music, and pick where in the track it should start.</p>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="music-youtube-url">YouTube link</label>
+          <input id="music-youtube-url" type="url" placeholder="https://www.youtube.com/watch?v=...">
+        </div>
+        <div class="field">
+          <label for="music-start-time">Start at (seconds)</label>
+          <input id="music-start-time" type="number" min="0" step="1" value="0">
+        </div>
+        <div class="field">
+          <label>Preview</label>
+          <div class="stat-value" id="music-start-preview" style="font-size:1.3rem;">0:00</div>
+        </div>
+      </div>
+      <div class="modal-actions" style="margin-top:16px;">
+        <span id="music-status" class="muted" style="margin-right:auto; align-self:center;"></span>
+        <button class="btn" id="music-save-btn" type="button">Save Music Settings</button>
+      </div>
+    </div>
+
     <div class="stats">
       <div class="card stat">
         <div class="stat-label">Total RSVP count</div>

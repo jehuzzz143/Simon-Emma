@@ -112,7 +112,7 @@ seal.addEventListener("click", () => {
    OPEN WEBSITE
 ========================================================== */
 
-const bgMusic = document.getElementById("bgMusic");
+let bgMusic = null;
 
 const intro = document.getElementById("intro");
 
@@ -124,8 +124,13 @@ const seatFinder = document.getElementById("table-finder");
 let musicStarted = false;
 const targetSection = window.location.hash;
 
-function startMusic() {
+async function startMusic() {
   if (musicStarted) return;
+
+  if (!bgMusic) {
+    bgMusic = window.bgMusicReady ? await window.bgMusicReady : null;
+    if (!bgMusic) return;
+  }
 
   // music.js may have already resumed playback (e.g. the visitor came
   // back from photos.html with music still going) — don't reset it

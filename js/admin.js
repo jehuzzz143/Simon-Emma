@@ -260,6 +260,83 @@ els.tbody.addEventListener('click', async (e) => {
     }
 });
 
+// ---------- background music settings ----------
+const musicEls = {
+    urlInput: document.getElementById('music-youtube-url'),
+    startInput: document.getElementById('music-start-time'),
+    preview: document.getElementById('music-start-preview'),
+    status: document.getElementById('music-status'),
+    saveBtn: document.getElementById('music-save-btn'),
+};
+
+function extractYouTubeId(url) {
+    if (!url) return null;
+    const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+    return m ? m[1] : null;
+}
+
+function formatMmSs(totalSeconds) {
+    const s = Math.max(0, Math.floor(Number(totalSeconds) || 0));
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return `${m}:${String(r).padStart(2, '0')}`;
+}
+
+async function loadMusicSettings() {
+    const { data, error } = await supabaseClient
+    .from('site_settings')
+    .select('youtube_url, start_time')
+    .eq('id', 1)
+    .maybeSingle();
+
+    if (error) {
+    console.error(error);
+    musicEls.status.textContent = 'Could not load current settings.';
+    return;
+    }
+
+    musicEls.urlInput.value = (data && data.youtube_url) || '';
+    musicEls.startInput.value = (data && data.start_time) || 0;
+    musicEls.preview.textContent = formatMmSs(musicEls.startInput.value);
+}
+
+musicEls.startInput.addEventListener('input', () => {
+    musicEls.preview.textContent = formatMmSs(musicEls.startInput.value);
+});
+
+musicEls.saveBtn.addEventListener('click', async () => {
+    const url = musicEls.urlInput.value.trim();
+    const startTime = Math.max(0, Math.floor(Number(musicEls.startInput.value) || 0));
+
+    if (url && !extractYouTubeId(url)) {
+    musicEls.status.textContent = 'That doesn’t look like a valid YouTube link.';
+    musicEls.status.style.color = 'var(--err)';
+    return;
+    }
+
+    musicEls.saveBtn.disabled = true;
+    musicEls.saveBtn.textContent = 'Saving…';
+    musicEls.status.style.color = '';
+
+    try {
+    const { error } = await supabaseClient
+        .from('site_settings')
+        .upsert({ id: 1, youtube_url: url || null, start_time: startTime, updated_at: new Date().toISOString() });
+    if (error) throw error;
+
+    musicEls.status.textContent = 'Saved. Refresh the main site to hear it.';
+    } catch (error) {
+    console.error(error);
+    musicEls.status.textContent = 'Could not save music settings.';
+    musicEls.status.style.color = 'var(--err)';
+    } finally {
+    musicEls.saveBtn.disabled = false;
+    musicEls.saveBtn.textContent = 'Save Music Settings';
+    }
+});
+
+loadMusicSettings();
+
 els.prevPageBtn.addEventListener('click', () => {
     if (currentPage > 1) {
     currentPage -= 1;
