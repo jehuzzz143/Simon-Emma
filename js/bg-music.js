@@ -68,6 +68,7 @@
             onReady: () => {
               this._duration = this._player.getDuration() || 0;
               this.readyState = 1;
+              this._isReady = true;
               this.dispatchEvent(new Event('loadedmetadata'));
               resolveReady();
             },
@@ -95,9 +96,18 @@
       }
     }
 
-    async play() {
-      await this._readyPromise;
-      this._player.playVideo();
+    play() {
+      // call playVideo() synchronously, in the same tick as the caller's
+      // click handler, whenever possible — an `await` here (even on an
+      // already-resolved promise) pushes the postMessage call into a
+      // later microtask, which can be enough for the browser to no
+      // longer associate it with the user gesture that triggered it,
+      // silently blocking playback in the cross-origin YouTube iframe.
+      if (this._isReady) {
+        this._player.playVideo();
+        return Promise.resolve();
+      }
+      return this._readyPromise.then(() => this._player.playVideo());
     }
     pause() {
       if (this._player) this._player.pauseVideo();

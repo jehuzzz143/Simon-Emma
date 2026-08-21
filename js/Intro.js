@@ -113,6 +113,12 @@ seal.addEventListener("click", () => {
 ========================================================== */
 
 let bgMusic = null;
+// resolve in the background as soon as possible (page load, not on
+// click) so that by the time the user actually clicks the seal,
+// startMusic() below can call .play() synchronously within that same
+// gesture instead of awaiting — see the comment in bg-music.js's
+// YouTubeAudio.play() for why that matters for autoplay permission.
+if (window.bgMusicReady) window.bgMusicReady.then((p) => { bgMusic = p; });
 
 const intro = document.getElementById("intro");
 
