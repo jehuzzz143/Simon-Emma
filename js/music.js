@@ -10,22 +10,32 @@
   const musicButton = document.getElementById("musicButton");
   if (!musicButton || !window.bgMusicReady) return;
 
-  // Attach the click handler immediately — window.bgMusicReady can take a
-  // while to resolve (Supabase lookup + YouTube iframe API load), and a
-  // tap before it resolves must not be silently dropped. The handler
-  // awaits the player itself instead of the listener being gated behind it.
-  musicButton.addEventListener("click", async () => {
-    const bgMusic = await window.bgMusicReady;
-    if (!bgMusic) return;
-    if (bgMusic.paused) bgMusic.play();
-    else bgMusic.pause();
+  // Resolve in the background (not inside the click handler) so that by
+  // the time the user actually clicks, the handler can call .play()/
+  // .pause() synchronously within that same gesture instead of awaiting
+  // — see the comment in bg-music.js's YouTubeAudio.play() for why an
+  // inline await here can silently break autoplay permission for the
+  // cross-origin YouTube iframe.
+  let bgMusic = null;
+  window.bgMusicReady.then((p) => { bgMusic = p; });
+
+  musicButton.addEventListener("click", () => {
+    if (bgMusic) {
+      if (bgMusic.paused) bgMusic.play();
+      else bgMusic.pause();
+      return;
+    }
+    // still resolving (a very early tap) — best effort; gesture
+    // association may not survive the await, but the click at least
+    // isn't silently dropped once the player becomes available.
+    window.bgMusicReady.then((p) => { if (p && p.paused) p.play(); });
   });
 
   setup();
 
   async function setup() {
   const STORAGE_KEY = "weddingMusicState";
-  const bgMusic = await window.bgMusicReady;
+  bgMusic = bgMusic || await window.bgMusicReady;
   if (!bgMusic) return;
 
   function readState() {
