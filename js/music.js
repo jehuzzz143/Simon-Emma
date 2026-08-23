@@ -6,11 +6,25 @@
    The actual player (YouTube-backed or the local fallback file)
    is resolved by js/bg-music.js; this file only drives it.
 ========================================================== */
-(async function () {
-  const STORAGE_KEY = "weddingMusicState";
-
+(function () {
   const musicButton = document.getElementById("musicButton");
   if (!musicButton || !window.bgMusicReady) return;
+
+  // Attach the click handler immediately — window.bgMusicReady can take a
+  // while to resolve (Supabase lookup + YouTube iframe API load), and a
+  // tap before it resolves must not be silently dropped. The handler
+  // awaits the player itself instead of the listener being gated behind it.
+  musicButton.addEventListener("click", async () => {
+    const bgMusic = await window.bgMusicReady;
+    if (!bgMusic) return;
+    if (bgMusic.paused) bgMusic.play();
+    else bgMusic.pause();
+  });
+
+  setup();
+
+  async function setup() {
+  const STORAGE_KEY = "weddingMusicState";
   const bgMusic = await window.bgMusicReady;
   if (!bgMusic) return;
 
@@ -35,11 +49,6 @@
 
   // exposed so Intro.js's envelope-open flow can coordinate with this
   window.weddingMusic = { bgMusic, musicButton, readState, saveState };
-
-  musicButton.addEventListener("click", () => {
-    if (bgMusic.paused) bgMusic.play();
-    else bgMusic.pause();
-  });
 
   bgMusic.addEventListener("play", () => {
     musicButton.classList.add("playing");
@@ -138,5 +147,6 @@
     applyInitialPosition();
   } else {
     bgMusic.addEventListener("loadedmetadata", applyInitialPosition, { once: true });
+  }
   }
 })();

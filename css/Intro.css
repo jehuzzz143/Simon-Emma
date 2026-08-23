@@ -1019,6 +1019,7 @@ body {
     display: block;
     opacity: 0;
     visibility: hidden;
+    overflow-x: hidden;
     transition:
         opacity .8s ease;
 }

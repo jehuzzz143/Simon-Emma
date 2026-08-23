@@ -475,8 +475,8 @@ background-attachment: scroll;
     color:var(--autumn-rust);
   }
   .rsvp-note p{
-    margin:0; font-size:.86rem; line-height:1.65;
-    color:var(--ink); opacity:.82; font-style:italic;
+    margin:0; font-size:.94rem; line-height:1.7;
+    color:var(--ink); font-weight:400;
   }
 
   /* ---------- Q&A ---------- */
