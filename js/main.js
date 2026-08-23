@@ -67,48 +67,53 @@
   }, { threshold: 0.1 });
   photoTiles.forEach(el => photoIO.observe(el));
 
-  // ---------- photo lightbox ----------
-  const photoLightbox = document.getElementById('photos-lightbox');
-  if(photoLightbox){
-    const lbImg = document.getElementById('photos-lb-img');
-    const lbCaption = document.getElementById('photos-lb-caption');
-    const lbTiles = [...photoTiles];
+  // ---------- reusable click-to-zoom lightbox ----------
+  function setupLightbox(lightboxId, tiles){
+    const lightbox = document.getElementById(lightboxId);
+    if(!lightbox || !tiles.length) return;
+
+    const lbImg = lightbox.querySelector('img');
+    const lbCaption = lightbox.querySelector('.lightbox-caption');
+    const lbTiles = [...tiles];
     let lbIndex = 0;
 
-    const showPhoto = (index) => {
+    const show = (index) => {
       lbIndex = (index + lbTiles.length) % lbTiles.length;
       const tile = lbTiles[lbIndex];
       const img = tile.querySelector('img');
       lbImg.src = img.src;
       lbImg.alt = img.alt;
-      lbCaption.textContent = tile.querySelector('.photo-cap')?.textContent || '';
+      lbCaption.textContent = tile.dataset.caption || '';
     };
 
-    const openPhotoLightbox = (index) => {
-      showPhoto(index);
-      photoLightbox.classList.add('open');
+    const open = (index) => {
+      show(index);
+      lightbox.classList.add('open');
       document.body.style.overflowY = 'hidden';
     };
 
-    const closePhotoLightbox = () => {
-      photoLightbox.classList.remove('open');
+    const close = () => {
+      lightbox.classList.remove('open');
       document.body.style.overflowY = 'auto';
       lbImg.src = '';
     };
 
-    lbTiles.forEach((tile, i) => tile.addEventListener('click', () => openPhotoLightbox(i)));
-    document.getElementById('photos-lb-close').addEventListener('click', closePhotoLightbox);
-    document.getElementById('photos-lb-prev').addEventListener('click', e => { e.stopPropagation(); showPhoto(lbIndex - 1); });
-    document.getElementById('photos-lb-next').addEventListener('click', e => { e.stopPropagation(); showPhoto(lbIndex + 1); });
-    photoLightbox.addEventListener('click', e => { if(e.target === photoLightbox) closePhotoLightbox(); });
+    lbTiles.forEach((tile, i) => tile.addEventListener('click', () => open(i)));
+    lightbox.querySelector('.lightbox-close').addEventListener('click', close);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', e => { e.stopPropagation(); show(lbIndex - 1); });
+    lightbox.querySelector('.lightbox-next').addEventListener('click', e => { e.stopPropagation(); show(lbIndex + 1); });
+    lightbox.addEventListener('click', e => { if(e.target === lightbox) close(); });
 
     document.addEventListener('keydown', e => {
-      if(!photoLightbox.classList.contains('open')) return;
-      if(e.key === 'Escape') closePhotoLightbox();
-      if(e.key === 'ArrowLeft') showPhoto(lbIndex - 1);
-      if(e.key === 'ArrowRight') showPhoto(lbIndex + 1);
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowLeft') show(lbIndex - 1);
+      if(e.key === 'ArrowRight') show(lbIndex + 1);
     });
   }
+
+  setupLightbox('photos-lightbox', photoTiles);
+  setupLightbox('qr-lightbox', document.querySelectorAll('.qr-item'));
 
   // ---------- parallax + scroll-driven movement ----------
   const parallaxBg = document.getElementById('parallax-bg');

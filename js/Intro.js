@@ -206,7 +206,19 @@ if (targetSection) {
 
   });
 
-}else{
+}
+
+// Table finder is only reachable via a QR code linking straight to
+// #table-finder. Once a visitor lands on that link, remember it so the
+// section keeps showing for them even after navigating elsewhere and
+// back — everyone else never sees it.
+const TABLE_FINDER_UNLOCK_KEY = "tableFinderUnlocked";
+
+if (targetSection === "#table-finder") {
+  localStorage.setItem(TABLE_FINDER_UNLOCK_KEY, "true");
+}
+
+if (localStorage.getItem(TABLE_FINDER_UNLOCK_KEY) !== "true") {
   seatFinder.style.display = "none";
 }
 
