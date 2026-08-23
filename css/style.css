@@ -465,7 +465,7 @@ background-attachment: scroll;
     display:flex; align-items:flex-start; gap:12px;
     max-width:460px; margin:28px auto 0;
     padding:16px 20px;
-    background:rgba(196,149,106,.1);
+    background:rgb(245 234 223);
     border:1px solid rgba(160,82,45,.22);
     border-radius:10px;
     text-align:left;
@@ -475,7 +475,7 @@ background-attachment: scroll;
     color:var(--autumn-rust);
   }
   .rsvp-note p{
-    margin:0; font-size:.94rem; line-height:1.7;
+    margin:0; font-size:.80rem; line-height:1.7;
     color:var(--ink); font-weight:400;
   }
 

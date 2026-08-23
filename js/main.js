@@ -2,9 +2,7 @@
   const SUPABASE_URL = 'https://rxqmvguyntontpgxupeh.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ4cW12Z3V5bnRvbnRwZ3h1cGVoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NTEyMjAsImV4cCI6MjA5OTIyNzIyMH0.4bil8xGsGpMfOygS3JvGdLeP3_M99FCmOTKGgKsHX3s';
 
-  // reused from js/bg-music.js if it already created one (avoids the
-  // SDK's "multiple GoTrueClient instances" warning)
-  const supabaseClient = window.supabaseClient || (window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // --------------
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

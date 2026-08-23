@@ -112,13 +112,7 @@ seal.addEventListener("click", () => {
    OPEN WEBSITE
 ========================================================== */
 
-let bgMusic = null;
-// resolve in the background as soon as possible (page load, not on
-// click) so that by the time the user actually clicks the seal,
-// startMusic() below can call .play() synchronously within that same
-// gesture instead of awaiting — see the comment in bg-music.js's
-// YouTubeAudio.play() for why that matters for autoplay permission.
-if (window.bgMusicReady) window.bgMusicReady.then((p) => { bgMusic = p; });
+const bgMusic = document.getElementById("bgMusic");
 
 const intro = document.getElementById("intro");
 
@@ -130,13 +124,8 @@ const seatFinder = document.getElementById("table-finder");
 let musicStarted = false;
 const targetSection = window.location.hash;
 
-async function startMusic() {
-  if (musicStarted) return;
-
-  if (!bgMusic) {
-    bgMusic = window.bgMusicReady ? await window.bgMusicReady : null;
-    if (!bgMusic) return;
-  }
+function startMusic() {
+  if (musicStarted || !bgMusic) return;
 
   // music.js may have already resumed playback (e.g. the visitor came
   // back from photos.html with music still going) — don't reset it

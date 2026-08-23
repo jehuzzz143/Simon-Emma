@@ -2,41 +2,14 @@
    BACKGROUND MUSIC — persists play/pause + position across
    page navigations (index.html <-> photos.html) via
    sessionStorage, since each page load is a fresh document.
-
-   The actual player (YouTube-backed or the local fallback file)
-   is resolved by js/bg-music.js; this file only drives it.
 ========================================================== */
 (function () {
-  const musicButton = document.getElementById("musicButton");
-  if (!musicButton || !window.bgMusicReady) return;
-
-  // Resolve in the background (not inside the click handler) so that by
-  // the time the user actually clicks, the handler can call .play()/
-  // .pause() synchronously within that same gesture instead of awaiting
-  // — see the comment in bg-music.js's YouTubeAudio.play() for why an
-  // inline await here can silently break autoplay permission for the
-  // cross-origin YouTube iframe.
-  let bgMusic = null;
-  window.bgMusicReady.then((p) => { bgMusic = p; });
-
-  musicButton.addEventListener("click", () => {
-    if (bgMusic) {
-      if (bgMusic.paused) bgMusic.play();
-      else bgMusic.pause();
-      return;
-    }
-    // still resolving (a very early tap) — best effort; gesture
-    // association may not survive the await, but the click at least
-    // isn't silently dropped once the player becomes available.
-    window.bgMusicReady.then((p) => { if (p && p.paused) p.play(); });
-  });
-
-  setup();
-
-  async function setup() {
   const STORAGE_KEY = "weddingMusicState";
-  bgMusic = bgMusic || await window.bgMusicReady;
-  if (!bgMusic) return;
+  const START_TIME = 1; // seconds — skip the first beat of dead air
+
+  const musicButton = document.getElementById("musicButton");
+  const bgMusic = document.getElementById("bgMusic");
+  if (!musicButton || !bgMusic) return;
 
   function readState() {
     try {
@@ -59,6 +32,11 @@
 
   // exposed so Intro.js's envelope-open flow can coordinate with this
   window.weddingMusic = { bgMusic, musicButton, readState, saveState };
+
+  musicButton.addEventListener("click", () => {
+    if (bgMusic.paused) bgMusic.play();
+    else bgMusic.pause();
+  });
 
   bgMusic.addEventListener("play", () => {
     musicButton.classList.add("playing");
@@ -137,8 +115,7 @@
 
   function applyInitialPosition() {
     const saved = readState();
-    const fallbackStart = bgMusic.defaultStartTime ?? 0;
-    const targetTime = (saved && Number.isFinite(saved.time)) ? saved.time : fallbackStart;
+    const targetTime = (saved && Number.isFinite(saved.time)) ? saved.time : START_TIME;
     // guard against a saved position past the track's actual length
     bgMusic.currentTime = (bgMusic.duration && targetTime >= bgMusic.duration) ? 0 : targetTime;
 
@@ -157,6 +134,5 @@
     applyInitialPosition();
   } else {
     bgMusic.addEventListener("loadedmetadata", applyInitialPosition, { once: true });
-  }
   }
 })();
