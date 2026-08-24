@@ -230,3 +230,23 @@ textarea{
     .stats,.form-grid{grid-template-columns:1fr}
     table{min-width:820px}
 }
+
+.gate-screen[hidden]{ display:none; }
+.gate-screen{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+.gate-card{
+    width:100%;
+    max-width:340px;
+    padding:28px;
+}
+.gate-error{
+    color:var(--err);
+    font-size:.88rem;
+    min-height:1.2em;
+    margin-top:8px;
+}

@@ -182,14 +182,24 @@ async function setMessageVisibility(id, shouldShow) {
 }
 
 async function deleteRsvp(id) {
-    const { error } = await supabaseClient
+    // ask Postgres to hand back the deleted row(s) so we can tell a real
+    // delete apart from Supabase silently matching 0 rows (e.g. a missing
+    // RLS delete policy returns no error, just an empty result)
+    const { data, error } = await supabaseClient
     .from('rsvps')
     .delete()
-    .eq('id', id);
+    .eq('id', id)
+    .select();
 
     if (error) {
     console.error(error);
     showStatus('Could not delete the RSVP row.', 'err');
+    return;
+    }
+
+    if (!data || data.length === 0) {
+    console.error('Delete matched 0 rows — likely missing a DELETE policy for the anon role on the rsvps table in Supabase.');
+    showStatus('Delete did not go through — check the delete policy on the rsvps table in Supabase.', 'err');
     return;
     }
 

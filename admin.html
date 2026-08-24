@@ -8,6 +8,20 @@
   <link rel="stylesheet" href="css/admin.css"/>
 </head>
 <body>
+  <div id="admin-gate" class="gate-screen">
+    <form id="gate-form" class="card gate-card">
+      <h1 style="font-size:1.3rem;">RSVP Admin</h1>
+      <p class="sub" style="margin-top:0;">Enter the admin password to continue.</p>
+      <div class="field">
+        <label for="gate-password">Password</label>
+        <input id="gate-password" type="password" autocomplete="current-password" autofocus required>
+      </div>
+      <div id="gate-error" class="gate-error"></div>
+      <button type="submit" class="btn" style="width:100%; margin-top:8px;">Unlock</button>
+    </form>
+  </div>
+
+  <div id="admin-content" hidden>
   <div class="wrap">
     <div class="top">
       <div>
@@ -126,9 +140,9 @@
       </form>
     </div>
   </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/email.js"></script>
+  <script src="js/admin-gate.js"></script>
 </body>
 </html>
