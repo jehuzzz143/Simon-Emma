@@ -98,8 +98,8 @@
 
     lbTiles.forEach((tile, i) => tile.addEventListener('click', () => open(i)));
     lightbox.querySelector('.lightbox-close').addEventListener('click', close);
-    lightbox.querySelector('.lightbox-prev').addEventListener('click', e => { e.stopPropagation(); show(lbIndex - 1); });
-    lightbox.querySelector('.lightbox-next').addEventListener('click', e => { e.stopPropagation(); show(lbIndex + 1); });
+    lightbox.querySelector('.lightbox-prev')?.addEventListener('click', e => { e.stopPropagation(); show(lbIndex - 1); });
+    lightbox.querySelector('.lightbox-next')?.addEventListener('click', e => { e.stopPropagation(); show(lbIndex + 1); });
     lightbox.addEventListener('click', e => { if(e.target === lightbox) close(); });
 
     document.addEventListener('keydown', e => {
@@ -112,6 +112,7 @@
 
   setupLightbox('photos-lightbox', photoTiles);
   setupLightbox('qr-lightbox', document.querySelectorAll('.qr-item'));
+  setupLightbox('dress-lightbox', document.querySelectorAll('.dress-sample-media'));
 
   // ---------- parallax + scroll-driven movement ----------
   const parallaxBg = document.getElementById('parallax-bg');

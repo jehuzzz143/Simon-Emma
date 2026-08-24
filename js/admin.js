@@ -19,7 +19,8 @@ const els = {
     paginationInfo: document.getElementById('pagination-info'),
     paginationPages: document.getElementById('pagination-pages'),
     prevPageBtn: document.getElementById('prev-page-btn'),
-    nextPageBtn: document.getElementById('next-page-btn')
+    nextPageBtn: document.getElementById('next-page-btn'),
+    exportBtn: document.getElementById('export-csv-btn')
 };
 
 const PAGE_SIZE = 20;
@@ -141,6 +142,47 @@ function renderPage() {
     renderPagination();
 }
 
+function csvField(value) {
+    const str = String(value ?? '');
+    if (/[",\r\n]/.test(str)) {
+    return `"${str.replaceAll('"', '""')}"`;
+    }
+    return str;
+}
+
+function exportRsvpsToCsv() {
+    if (!allRows.length) {
+    showStatus('No RSVP records to export.', 'err');
+    return;
+    }
+
+    const headers = ['Name', 'Email', 'Attendance', 'Guests', 'Message', 'Website Status'];
+    const lines = [headers.join(',')];
+
+    allRows.forEach(row => {
+    lines.push([
+        csvField(row.name),
+        csvField(row.email),
+        csvField(row.attending),
+        csvField(row.guests ?? 0),
+        csvField(row.message),
+        csvField(getWebsiteStatus(row))
+    ].join(','));
+    });
+
+    const csv = '﻿' + lines.join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `rsvps-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+}
+
 async function loadRsvps() {
     const { data, error } = await supabaseClient
     .from('rsvps')
@@ -238,6 +280,8 @@ async function handleCreateSubmit(e) {
     els.submitBtn.textContent = 'Save RSVP';
     }
 }
+
+els.exportBtn.addEventListener('click', exportRsvpsToCsv);
 
 els.openBtn.addEventListener('click', openModal);
 els.closeBtn.addEventListener('click', closeModal);
