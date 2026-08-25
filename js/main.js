@@ -81,7 +81,7 @@
       const img = tile.querySelector('img');
       lbImg.src = img.src;
       lbImg.alt = img.alt;
-      lbCaption.textContent = tile.dataset.caption || '';
+      if(lbCaption) lbCaption.textContent = tile.dataset.caption || '';
     };
 
     const open = (index) => {
