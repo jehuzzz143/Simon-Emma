@@ -253,6 +253,25 @@ function clearInlineMessage() {
   msg.className = 'rsvp-msg';
 }
 
+// Best-effort confirmation email via OutSystems — an RSVP that already
+// saved to Supabase should still count as a success even if this fails,
+// so failures here are only logged, never surfaced to the guest.
+async function notifyRsvpEmail({ name, email, attending }) {
+  const params = new URLSearchParams({
+    guestName: name,
+    guestEmail: email,
+    guestIsAttending: attending === 'Joyfully accepts' ? 'true' : 'false'
+  });
+
+  try {
+    await fetch(`https://personal-t3vejdmt.outsystemscloud.com/Cat/rest/SendRSVP/RSVPNotification?${params.toString()}`, {
+      method: 'POST'
+    });
+  } catch (err) {
+    console.error('RSVP notification email failed:', err);
+  }
+}
+
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -286,7 +305,11 @@ form.addEventListener('submit', async (e) => {
       throw error;
     }
 
-    const successMsg = "Thank you! We've received your RSVP and can't wait to celebrate with you.";
+    await notifyRsvpEmail(payload);
+
+    const successMsg = payload.attending === 'Joyfully accepts'
+      ? "Thank you! We've received your RSVP and can't wait to celebrate with you."
+      : "Thank you for letting us know. We're sorry you can't make it, but we appreciate you taking the time to RSVP.";
     showToast(successMsg);
     showInlineMessage(successMsg, 'ok');
 
