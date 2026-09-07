@@ -276,6 +276,18 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   clearInlineMessage();
+
+  // RSVP deadline: September 11, 2026 
+  const today = new Date(); 
+  const deadline = new Date('2026-09-11T23:59:59'); 
+  // Prevent RSVP submission after the deadline 
+  if (today > deadline) { 
+    const expiredMsg = 'RSVP submission has already elapsed. The deadline was September 11, 2026.'; 
+    showToast(expiredMsg, 'error'); 
+    showInlineMessage(expiredMsg, 'err'); 
+    return; 
+  }
+
   submitBtn.disabled = true;
   submitBtn.textContent = 'Sending…';
 
