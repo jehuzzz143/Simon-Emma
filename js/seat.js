@@ -1,9 +1,17 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbxcz3ApREZwbSCDbwi32Z9mtFFnnk5SA4AMzqd7Iab_olsa6GIRTPxwjJ8m8tT1uWvm/exec";
 
+const search = document.getElementById("search");
+const suggestions = document.getElementById("suggestions");
+const result = document.getElementById("result");
+const loading = document.getElementById("loading");
 
 let guests = [];
 
 async function loadGuests() {
+
+     // Loading state
+    search.disabled = true;
+    search.placeholder = "Downloading guest list...";
 
     try{
 
@@ -16,23 +24,24 @@ async function loadGuests() {
         
         );
         loading.style.display = "none";
-
+        search.disabled = false;
+        search.placeholder = "Search your name...";
+        
     }
 
     catch(error){
 
         console.error(error);
 
-loading.innerHTML = "Unable to load guest list.";
+        search.disabled = true;
+        search.placeholder = "Unable to load guest list";
+        loading.textContent = "Unable to load guest list. Please try again, Refresh.";
 
     }
 
 }
 
-const search = document.getElementById("search");
-const suggestions = document.getElementById("suggestions");
-const result = document.getElementById("result");
-const loading = document.getElementById("loading");
+
 
 search.addEventListener("input", function(){
 
