@@ -106,7 +106,7 @@ search.addEventListener("input", function(){
                 <p>Your table assignment is</p>
 
                 <div class="table">
-                    TABLE ${guest.table}
+                     ${guest.table}
                 </div>
 
             </div>
