@@ -6,11 +6,11 @@ async function sendWeddingReminder() {
 
     sendReminderBtn.disabled = true;
     sendReminderBtn.textContent = "Sending...";
-
+    //"https://personal-t3vejdmt.outsystemscloud.com/Cat/rest/SendRSVP/RSVPSendEmail",
     try {
 
         const response = await fetch(
-            "https://personal-t3vejdmt.outsystemscloud.com/Cat/rest/SendRSVP/RSVPSendEmail",
+            "https://personal-t3vejdmt.outsystemscloud.com/Cat/rest/SendRSVP/RSVPReminder",
             {
                 method: "POST"
             }
